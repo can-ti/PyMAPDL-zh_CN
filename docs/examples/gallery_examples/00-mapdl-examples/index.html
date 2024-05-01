@@ -1,0 +1,844 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>Full examples using PyMAPDL &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../../../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/00-mapdl-examples/index';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="2D 静磁螺线管分析" href="2d_magnetostatic_solenoid-BodyFlux_Averaging.html" />
+    <link rel="prev" title="用 PySide6 在 Python 中创建图形用户界面 web 应用程序" href="../../extended_examples/gui/executable.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../../../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../../../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../../../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../devportal.html">PyMAPDL Developer Portal articles</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/verif-manual/index.html">Verification Manual</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/technology_showcase_examples/index.html">Technology Showcases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extended_examples/index.html">Extended examples</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="current reference internal" href="#">Full examples using PyMAPDL</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="2d_magnetostatic_solenoid-BodyFlux_Averaging.html">2D 静磁螺线管分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_plate_with_a_hole.html">MAPDL 2D 平面应力集中分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_pressure_vessel.html">2D 压力容器分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3d_notch.html">缺口板的 3D 应力集中分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3d_plate_thermal.html">pyMAPDL 基本热力学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acoustic_analysis.html">3D 声学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_dpf_example.html">使用 PyMAPDL 的 DPF-Core 基本用法</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="bracket_static.html">角钢支架的静态分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="composite_dcb.html">基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact_elements.html">接触单元示例</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="cyclic_analysis.html">循环对称分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_static.html">静态循环分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exhaust_manifold_thermal_stress.html">排气歧管的热结构分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">绘图和网格访问</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lathe_cutter.html">车床刀具结构分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapdl_3d_beam.html">MAPDL 3D Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapdl_beam.html">MAPDL 2D Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modal_beam.html">MAPDL 梁模态分析示例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="path_operations.html">PyMAPDL 和 MAPDL 中的路径插值操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressure_vessel.html">压力容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyvista_mesh.html">PyVista 网格集成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slashmap_cfx_mapping.html">将 CFX 压力数据映射到结构叶片</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spotweld.html">Running an input file - spotweld SHELL181 example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torsional_load.html">Torsional load on a bar using SURF154 elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transient_thermal.html">瞬态热力学分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01-geometry/index.html">Geometry examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-tips-n-tricks/index.html">Miscellaneous examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03-general-fea/index.html">Academic finite element examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Full examples using PyMAPDL</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="full-examples-using-pymapdl">
+<span id="sphx-glr-examples-gallery-examples-00-mapdl-examples"></span><h1>Full examples using PyMAPDL<a class="headerlink" href="#full-examples-using-pymapdl" title="Link to this heading">#</a></h1>
+<p>这些示例演示了使用 PyMAPDL 模块的完整示例。</p>
+<div class="sphx-glr-thumbnails"><div class="sphx-glr-thumbcontainer" tooltip=" 本示例展示了如何收集和绘制单元间材料不连续的结果（Power graphics style）与默认的全平均结果（Full graphics style）。"><img alt="" src="../../../_images/sphx_glr_2d_magnetostatic_solenoid-BodyFlux_Averaging_thumb.png" />
+<p><a class="reference internal" href="2d_magnetostatic_solenoid-BodyFlux_Averaging.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-2d-magnetostatic-solenoid-bodyflux-averaging-py"><span class="std std-ref">2D 静磁螺线管分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">2D 静磁螺线管分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本教程展示了如何使用 PyMAPDL 确定和验证 &quot;应力集中系数&quot; ，先使用二维平面单元建模，然后使用三维单元进行验证。"><img alt="" src="../../../_images/sphx_glr_2d_plate_with_a_hole_thumb.png" />
+<p><a class="reference internal" href="2d_plate_with_a_hole.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-2d-plate-with-a-hole-py"><span class="std std-ref">MAPDL 2D 平面应力集中分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">MAPDL 2D 平面应力集中分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例演示如何创建一个基本压力容器并对其施加环向压力。"><img alt="" src="../../../_images/sphx_glr_2d_pressure_vessel_thumb.png" />
+<p><a class="reference internal" href="2d_pressure_vessel.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-2d-pressure-vessel-py"><span class="std std-ref">2D 压力容器分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">2D 压力容器分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本教程是 2D 平面示例 ref_plane_stress_concentration 的 3D 推论。 不过，此示例验证了在有限宽度薄板上建立相对单缺口模型时的应力集中因子 K-t 。"><img alt="" src="../../../_images/sphx_glr_3d_notch_thumb.png" />
+<p><a class="reference internal" href="3d_notch.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-3d-notch-py"><span class="std std-ref">缺口板的 3D 应力集中分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">缺口板的 3D 应力集中分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何使用 MAPDL 在 pyMAPDL 中创建板块、施加热边界条件、求解并绘制曲线。"><img alt="" src="../../../_images/sphx_glr_3d_plate_thermal_thumb.png" />
+<p><a class="reference internal" href="3d_plate_thermal.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-3d-plate-thermal-py"><span class="std std-ref">pyMAPDL 基本热力学分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">pyMAPDL 基本热力学分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何使用 PyMAPDL 和 FLUID 单元进行声学分析。"><img alt="" src="../../../_images/sphx_glr_acoustic_analysis_thumb.png" />
+<p><a class="reference internal" href="acoustic_analysis.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-acoustic-analysis-py"><span class="std std-ref">3D 声学分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">3D 声学分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例改编自 DPF-Core 基本用法示例 ， 展示了如何在 DPF 中打开结果文件，并进行一些基本的后处理。"><img alt="" src="../../../_images/sphx_glr_basic_dpf_example_thumb.png" />
+<p><a class="reference internal" href="basic_dpf_example.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-basic-dpf-example-py"><span class="std std-ref">使用 PyMAPDL 的 DPF-Core 基本用法</span></a></p>
+  <div class="sphx-glr-thumbnail-title">使用 PyMAPDL 的 DPF-Core 基本用法</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例改编自 Ansys APDL 经典教程 Static Analysis of a Corner Bracket（角钢支架的静态分析） 。"><img alt="" src="../../../_images/sphx_glr_bracket_static_thumb.png" />
+<p><a class="reference internal" href="bracket_static.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-bracket-static-py"><span class="std std-ref">角钢支架的静态分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">角钢支架的静态分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="这是一个经典的双悬臂梁试验，常用于研究复合材料板的 I 型界面脱层。"><img alt="" src="../../../_images/sphx_glr_composite_dcb_thumb.png" />
+<p><a class="reference internal" href="composite_dcb.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-composite-dcb-py"><span class="std std-ref">基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟</span></a></p>
+  <div class="sphx-glr-thumbnail-title">基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例演示如何为一般接触问题创建接触单元。"><img alt="" src="../../../_images/sphx_glr_contact_elements_thumb.png" />
+<p><a class="reference internal" href="contact_elements.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-contact-elements-py"><span class="std std-ref">接触单元示例</span></a></p>
+  <div class="sphx-glr-thumbnail-title">接触单元示例</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本示例使用循环扇形的参数几何创建了一个叶盘，然后对该循环扇形进行模态分析。 然后，我们使用传统的 MAPDL reader 对结果进行后处理，最后使用参数建模器生成另一个循环模型。"><img alt="" src="../../../_images/sphx_glr_cyclic_analysis_thumb.png" />
+<p><a class="reference internal" href="cyclic_analysis.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-cyclic-analysis-py"><span class="std std-ref">循环对称分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">循环对称分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="在 1000 RPM 转速下，使用英制单位系统对转子扇形示例进行静态循环分析。"><img alt="" src="../../../_images/sphx_glr_cyclic_static_thumb.png" />
+<p><a class="reference internal" href="cyclic_static.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-cyclic-static-py"><span class="std std-ref">静态循环分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">静态循环分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例说明如何映射 CFD 分析结果并执行有限元 (FE) 分析。"><img alt="" src="../../../_images/sphx_glr_exhaust_manifold_thermal_stress_thumb.png" />
+<p><a class="reference internal" href="exhaust_manifold_thermal_stress.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-exhaust-manifold-thermal-stress-py"><span class="std std-ref">排气歧管的热结构分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">排气歧管的热结构分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="PyMAPDL 可以加载基本的 IGES 几何图形进行分析。"><img alt="" src="../../../_images/sphx_glr_geometry_thumb.png" />
+<p><a class="reference internal" href="geometry.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-geometry-py"><span class="std std-ref">绘图和网格访问</span></a></p>
+  <div class="sphx-glr-thumbnail-title">绘图和网格访问</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="介绍 PyMAPDL 的基本功能。"><img alt="" src="../../../_images/sphx_glr_lathe_cutter_thumb.png" />
+<p><a class="reference internal" href="lathe_cutter.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-lathe-cutter-py"><span class="std std-ref">车床刀具结构分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">车床刀具结构分析</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="这是一个简单的示例，加载包含梁的档案文件，然后使用简化的 modal_analysis 方法运行模态分析。"><img alt="" src="../../../_images/sphx_glr_mapdl_3d_beam_thumb.png" />
+<p><a class="reference internal" href="mapdl_3d_beam.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-mapdl-3d-beam-py"><span class="std std-ref">MAPDL 3D Beam</span></a></p>
+  <div class="sphx-glr-thumbnail-title">MAPDL 3D Beam</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip=" 本例来自 Paletikrishna Chaitanya、Sambanarajesh Kumar 和 Datti Srinivas 合著的 &quot;Finite element analysis..."><img alt="" src="../../../_images/sphx_glr_mapdl_beam_thumb.png" />
+<p><a class="reference internal" href="mapdl_beam.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-mapdl-beam-py"><span class="std std-ref">MAPDL 2D Beam</span></a></p>
+  <div class="sphx-glr-thumbnail-title">MAPDL 2D Beam</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何执行简单的模态分析并将分析结果制作成动画。"><img alt="" src="../../../_images/sphx_glr_modal_beam_thumb.png" />
+<p><a class="reference internal" href="modal_beam.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-modal-beam-py"><span class="std std-ref">MAPDL 梁模态分析示例</span></a></p>
+  <div class="sphx-glr-thumbnail-title">MAPDL 梁模态分析示例</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本教程展示了如何使用 pyansys 和 MAPDL 沿路径进行应力插值。它展示了 pyvista 模块执行插值的一些高级功能。"><img alt="" src="../../../_images/sphx_glr_path_operations_thumb.png" />
+<p><a class="reference internal" href="path_operations.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-path-operations-py"><span class="std std-ref">PyMAPDL 和 MAPDL 中的路径插值操作</span></a></p>
+  <div class="sphx-glr-thumbnail-title">PyMAPDL 和 MAPDL 中的路径插值操作</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本例演示如何创建一个基本压力容器并对其施加压力。"><img alt="" src="../../../_images/sphx_glr_pressure_vessel_thumb.png" />
+<p><a class="reference internal" href="pressure_vessel.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-pressure-vessel-py"><span class="std std-ref">压力容器</span></a></p>
+  <div class="sphx-glr-thumbnail-title">压力容器</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="在 MAPDL 中对 pyvista 生成的网格进行模态分析。"><img alt="" src="../../../_images/sphx_glr_pyvista_mesh_thumb.png" />
+<p><a class="reference internal" href="pyvista_mesh.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-pyvista-mesh-py"><span class="std std-ref">PyVista 网格集成</span></a></p>
+  <div class="sphx-glr-thumbnail-title">PyVista 网格集成</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="本测试的目的是在 PyMAPDL 中演示 CFX 压力数据与 11 个叶片结构模型的映射。"><img alt="" src="../../../_images/sphx_glr_slashmap_cfx_mapping_thumb.png" />
+<p><a class="reference internal" href="slashmap_cfx_mapping.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-slashmap-cfx-mapping-py"><span class="std std-ref">将 CFX 压力数据映射到结构叶片</span></a></p>
+  <div class="sphx-glr-thumbnail-title">将 CFX 压力数据映射到结构叶片</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This MAPDL example demonstrates how to model spot welding on three thin sheets of metal. Here, ..."><img alt="" src="../../../_images/sphx_glr_spotweld_thumb.png" />
+<p><a class="reference internal" href="spotweld.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-spotweld-py"><span class="std std-ref">Running an input file - spotweld SHELL181 example</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Running an input file - spotweld SHELL181 example</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="This Ansys PyMAPDL script builds a bar and applies torque to it using SURF154 elements. This is..."><img alt="" src="../../../_images/sphx_glr_torsional_load_thumb.png" />
+<p><a class="reference internal" href="torsional_load.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-torsional-load-py"><span class="std std-ref">Torsional load on a bar using SURF154 elements</span></a></p>
+  <div class="sphx-glr-thumbnail-title">Torsional load on a bar using SURF154 elements</div>
+</div><div class="sphx-glr-thumbcontainer" tooltip="此示例演示如何了使用 PyMAPDL 输入随时间变化的温度表，以改变梁的温度。它使用对流系数和体积温度独立变化的对流载荷。"><img alt="" src="../../../_images/sphx_glr_transient_thermal_thumb.png" />
+<p><a class="reference internal" href="transient_thermal.html#sphx-glr-examples-gallery-examples-00-mapdl-examples-transient-thermal-py"><span class="std std-ref">瞬态热力学分析</span></a></p>
+  <div class="sphx-glr-thumbnail-title">瞬态热力学分析</div>
+</div></div><div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/examples/gallery_examples/00-mapdl-examples/index.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

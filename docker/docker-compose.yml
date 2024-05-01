@@ -1,0 +1,58 @@
+version: '3.3'
+
+# This is a docker-compose file which launch a remote MAPDL instance in a dockerized environment.
+# You can connect to this instance throught the port 50052 and 50055 (for the database feature).
+#
+# For the license, you need to provide the hostname of the license server.
+#
+# REQUIREMENTS:
+# =============
+#
+# - docker
+# - docker images from ghcr.io (you might need to do 'docker login ghcr.io' first)
+#
+# USAGE:
+# ======
+#
+# 1. You need two environment variables. One called ``DOCKER_IMAGE`` which contains the path to the
+# docker image, and another one called ``ANSYSLMD_LICENSE_FILE`` which points to the license server.
+# For example:
+#
+#     export ANSYSLMD_LICENSE_FILE=1055@mylicensehost
+#     export DOCKER_IMAGE=myregistry.com/myimage:mytag
+# 
+# 2. Run the following command:
+# 
+#     docker-compose up
+#
+# Optionally you can specify the '-d' flag for detaching mode (the container will run in the background).
+#
+#
+# NOTES:
+# ======
+#
+# - 'AWP_ROOT222' is where Ansys is installed.
+# - The entrypoint must be defined in the docker image.
+# - If you want to mount the local directory, please add the 'volumes' section to the 'mapdl' service.
+# 
+#      volumes:
+#        - ./:/local
+#
+
+services:
+  mapdl:
+    restart: always
+    shm_size: '8gb'
+    container_name: mapdl
+    mem_reservation: 8g
+    environment:
+      - ANSYSLMD_LICENSE_FILE=${ANSYSLMD_LICENSE_FILE}
+      - ANSYS_LOCK=OFF
+      - AWP_ROOT222=/ansys_inc
+    ports:
+      - '50052:50052'
+      - '50055:50055'
+    image: ${DOCKER_IMAGE}
+    user: "0:0"
+    entrypoint: "/bin/bash ansys -grpc"
+  

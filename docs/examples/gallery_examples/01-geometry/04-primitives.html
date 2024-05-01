@@ -1,0 +1,1061 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>Primitives &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../../../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/01-geometry/04-primitives';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Miscellaneous examples" href="../02-tips-n-tricks/index.html" />
+    <link rel="prev" title="Volumes" href="03-volumes.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../../../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../../../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../../../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../devportal.html">PyMAPDL Developer Portal articles</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/verif-manual/index.html">Verification Manual</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/technology_showcase_examples/index.html">Technology Showcases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extended_examples/index.html">Extended examples</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../00-mapdl-examples/index.html">Full examples using PyMAPDL</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Geometry examples</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="00-keypoints.html">Keypoints</a></li>
+<li class="toctree-l2"><a class="reference internal" href="01-lines.html">Lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="02-areas.html">Areas</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03-volumes.html">Volumes</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Primitives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../02-tips-n-tricks/index.html">Miscellaneous examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03-general-fea/index.html">Academic finite element examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Geometry examples</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Primitives</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-01-geometry-04-primitives-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="primitives">
+<span id="ref-basic-geometry-primitives"></span><span id="sphx-glr-examples-gallery-examples-01-geometry-04-primitives-py"></span><h1>Primitives<a class="headerlink" href="#primitives" title="Link to this heading">#</a></h1>
+<p>此示例显示用于创建 volume 的不同命令，例如块、圆柱体等。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.mapdl.core</span> <span class="kn">import</span> <span class="n">launch_mapdl</span>
+
+<span class="c1"># start MAPDL and enter the pre-processing routine</span>
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mapdl</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Product:             Ansys Mechanical Enterprise
+MAPDL Version:       23.1
+ansys.mapdl Version: 0.67.0
+</pre></div>
+</div>
+<section id="apdl-command-blc4">
+<h2>APDL Command: BLC4<a class="headerlink" href="#apdl-command-blc4" title="Link to this heading">#</a></h2>
+<p>通过角点创建矩形 area 或长方体 volume 。</p>
+<p>从 <code class="docutils literal notranslate"><span class="pre">(0.25,</span> <span class="pre">0.25)</span></code> 开始创建一个 <code class="docutils literal notranslate"><span class="pre">(0.5</span> <span class="pre">x</span> <span class="pre">0.5)</span></code> 矩形</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum1</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">blc4</span><span class="p">(</span><span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_04-primitives_001.png" srcset="../../../_images/sphx_glr_04-primitives_001.png" alt="04 primitives" class = "sphx-glr-single-img"/><p>创建一个尺寸为 <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">x</span> <span class="pre">4</span> <span class="pre">x</span> <span class="pre">9)</span></code> 的 volume， volume 的一角位于当前工作平面的 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> 。</p>
+<p>该方法返回 volume 编号。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">blc4</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_002.png" srcset="../../../_images/sphx_glr_04-primitives_002.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_003.png" srcset="../../../_images/sphx_glr_04-primitives_003.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-blc5">
+<h2>APDL Command: BLC5<a class="headerlink" href="#apdl-command-blc5" title="Link to this heading">#</a></h2>
+<p>通过中心点和角点创建矩形 area 或块 volume。</p>
+<p>这与 BLC4 不同，因为它描述的是中心点而不是角点。</p>
+<p>创建一个以 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> 为中心、宽 0.5、高 0.5 的正方形。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum1</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">blc5</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_04-primitives_004.png" srcset="../../../_images/sphx_glr_04-primitives_004.png" alt="04 primitives" class = "sphx-glr-single-img"/><p>创建一个尺寸为 <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">x</span> <span class="pre">4</span> <span class="pre">x</span> <span class="pre">9</span></code> 的图块，其顶点位于当前工作平面的 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> 。</p>
+<p>该方法返回 volume 编号。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">blc5</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_005.png" srcset="../../../_images/sphx_glr_04-primitives_005.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_006.png" srcset="../../../_images/sphx_glr_04-primitives_006.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-block">
+<h2>APDL Command: BLOCK<a class="headerlink" href="#apdl-command-block" title="Link to this heading">#</a></h2>
+<p>根据工作平面坐标创建大小为 <code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">x</span> <span class="pre">2</span> <span class="pre">x</span> <span class="pre">3)</span></code> 的图块 volume</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">block</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span>
+    <span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">background</span><span class="o">=</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">),</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_007.png" srcset="../../../_images/sphx_glr_04-primitives_007.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_008.png" srcset="../../../_images/sphx_glr_04-primitives_008.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-con4">
+<h2>APDL Command: CON4<a class="headerlink" href="#apdl-command-con4" title="Link to this heading">#</a></h2>
+<p>在工作平面的任意位置创建锥形 volume。</p>
+<p>创建一个底部半径为 3、高为 10 的圆锥体。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">con4</span><span class="p">(</span><span class="n">rad1</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">rad2</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_009.png" srcset="../../../_images/sphx_glr_04-primitives_009.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_010.png" srcset="../../../_images/sphx_glr_04-primitives_010.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-cone">
+<h2>APDL Command: CONE<a class="headerlink" href="#apdl-command-cone" title="Link to this heading">#</a></h2>
+<p>以工作平面原点为中心，创建一个锥形 volume。（CONE – conical /’kɑnɪkl/)</p>
+<p>以 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> 为中心，创建一个底部半径为 3、顶部半径为 1、高度为 10 的四分之一圆锥。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cone</span><span class="p">(</span><span class="n">rbot</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">rtop</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">z1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">z2</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_011.png" srcset="../../../_images/sphx_glr_04-primitives_011.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_012.png" srcset="../../../_images/sphx_glr_04-primitives_012.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-cyl4">
+<h2>APDL Command: CYL4<a class="headerlink" href="#apdl-command-cyl4" title="Link to this heading">#</a></h2>
+<p>在工作平面的任意位置创建圆形 area 或圆柱形 volume。（cylinder /ˈsɜːrkjələr/）</p>
+<p>以原点为中心，创建一条外半径为 2、内半径为 1 的半弧。</p>
+<p>注意关键字参数 <code class="docutils literal notranslate"><span class="pre">depth</span></code> 是未设置的，这将生成 area 而不是 volume 。将深度设置为大于 0 的值将生成 volume。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><span class="n">xcenter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ycenter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rad1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rad2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_04-primitives_013.png" srcset="../../../_images/sphx_glr_04-primitives_013.png" alt="04 primitives" class = "sphx-glr-single-img"/><p>以原点为中心创建一个体积半弧，外半径为 2，内半径为 1，厚度为 0.55。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span>
+    <span class="n">xcenter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">ycenter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rad1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">rad2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">180</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mf">0.55</span>
+<span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_014.png" srcset="../../../_images/sphx_glr_04-primitives_014.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_015.png" srcset="../../../_images/sphx_glr_04-primitives_015.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-cyl5">
+<h2>APDL Command: CYL5<a class="headerlink" href="#apdl-command-cyl5" title="Link to this heading">#</a></h2>
+<p>通过端点创建圆形 area 或圆柱形 volume。</p>
+<p>创建一个圆，圆的一点位于 <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> ，另一点位于 <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2)</span></code> 。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyl5</span><span class="p">(</span><span class="n">xedge1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">yedge1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xedge2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">yedge2</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">line_width</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_04-primitives_016.png" srcset="../../../_images/sphx_glr_04-primitives_016.png" alt="04 primitives" class = "sphx-glr-single-img"/><p>创建一个圆柱体，圆的一点位于 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">Y)</span> <span class="pre">==</span> <span class="pre">(1,</span> <span class="pre">1)</span></code> ，另一点位于 <code class="docutils literal notranslate"><span class="pre">(X,</span> <span class="pre">Y)</span> <span class="pre">==</span> <span class="pre">(2,</span> <span class="pre">2)</span></code> ，高为 3。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyl5</span><span class="p">(</span><span class="n">xedge1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">yedge1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xedge2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">yedge2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_017.png" srcset="../../../_images/sphx_glr_04-primitives_017.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_018.png" srcset="../../../_images/sphx_glr_04-primitives_018.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-cylind">
+<h2>APDL Command: CYLIND<a class="headerlink" href="#apdl-command-cylind" title="Link to this heading">#</a></h2>
+<p>创建一个以工作平面原点为中心的圆柱 volume。</p>
+<p>创建一个内半径为 0.9、外半径为 1.0、高为 5 的空心圆柱体</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cylind</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">z1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">z2</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_019.png" srcset="../../../_images/sphx_glr_04-primitives_019.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_020.png" srcset="../../../_images/sphx_glr_04-primitives_020.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-pcirc">
+<h2>APDL Command: PCIRC<a class="headerlink" href="#apdl-command-pcirc" title="Link to this heading">#</a></h2>
+<p>创建一个以工作平面原点为中心的圆形区域。</p>
+<p>在本例中，创建了一个内半径为 0.95、外半径为 1 的圆形 area 。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">pcirc</span><span class="p">(</span><span class="mf">0.95</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_04-primitives_021.png" srcset="../../../_images/sphx_glr_04-primitives_021.png" alt="04 primitives" class = "sphx-glr-single-img"/></section>
+<section id="apdl-command-rectng">
+<h2>APDL Command: RECTNG<a class="headerlink" href="#apdl-command-rectng" title="Link to this heading">#</a></h2>
+<p>在工作平面的任意位置创建一个矩形 area。 (rectangular /rek’tæŋgjʊlə/)</p>
+<p>在此示例中，创建了一个矩形，该矩形的一个角位于 <code class="docutils literal notranslate"><span class="pre">(0.5,</span> <span class="pre">0.5)</span></code> ，另一个角位于 <code class="docutils literal notranslate"><span class="pre">(1.5,</span> <span class="pre">2.5)</span></code> 。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">anum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">rectng</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_04-primitives_022.png" srcset="../../../_images/sphx_glr_04-primitives_022.png" alt="04 primitives" class = "sphx-glr-single-img"/></section>
+<section id="apdl-command-sph4">
+<h2>APDL Command: SPH4<a class="headerlink" href="#apdl-command-sph4" title="Link to this heading">#</a></h2>
+<p>在工作平面的任意位置创建球形体。 (spherical /ˈsferɪkl/)</p>
+<p>本例创建了一个空心球体，以 <code class="docutils literal notranslate"><span class="pre">(0,</span> <span class="pre">0)</span></code> 为中心，内半径为 0.9，外半径为 1.0。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">sph4</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">rad1</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">rad2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">smooth_shading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_023.png" srcset="../../../_images/sphx_glr_04-primitives_023.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_024.png" srcset="../../../_images/sphx_glr_04-primitives_024.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-sphere">
+<h2>APDL Command: SPHERE<a class="headerlink" href="#apdl-command-sphere" title="Link to this heading">#</a></h2>
+<p>在工作平面的任意位置创建球形体。</p>
+<p>本例创建了一个半空心球体，内半径为 0.9，外半径为 1.0。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">sphere</span><span class="p">(</span><span class="n">rad1</span><span class="o">=</span><span class="mf">0.95</span><span class="p">,</span> <span class="n">rad2</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">270</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">quality</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_025.png" srcset="../../../_images/sphx_glr_04-primitives_025.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_026.png" srcset="../../../_images/sphx_glr_04-primitives_026.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-sph5">
+<h2>APDL Command: SPH5<a class="headerlink" href="#apdl-command-sph5" title="Link to this heading">#</a></h2>
+<p>在工作平面的任意位置创建球形体。</p>
+<p>该示例创建了一个球体，其中一个点位于 <code class="docutils literal notranslate"><span class="pre">(1,</span> <span class="pre">1)</span></code> ，另一个点位于 <code class="docutils literal notranslate"><span class="pre">(2,</span> <span class="pre">2)</span></code> 。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">sph5</span><span class="p">(</span><span class="n">xedge1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">yedge1</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">xedge2</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">yedge2</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">smooth_shading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_027.png" srcset="../../../_images/sphx_glr_04-primitives_027.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_028.png" srcset="../../../_images/sphx_glr_04-primitives_028.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="apdl-command-torus">
+<h2>APDL Command: TORUS<a class="headerlink" href="#apdl-command-torus" title="Link to this heading">#</a></h2>
+<p>创建环形体积。 (toroidal /tɔ:’rɔidəl/)</p>
+<p>此示例创建了一个内小半径为 1、中间半径为 2、大半径为 5 的环面。数值 0 和 180 定义了环的起始角和终止角。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">vnum</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">torus</span><span class="p">(</span><span class="n">rad1</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">rad2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rad3</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">theta1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">theta2</span><span class="o">=</span><span class="mi">180</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">(</span><span class="n">show_lines</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">show_bounds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">smooth_shading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_04-primitives_029.png" srcset="../../../_images/sphx_glr_04-primitives_029.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_04-primitives_030.png" srcset="../../../_images/sphx_glr_04-primitives_030.png" alt="04 primitives" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="stop-mapdl">
+<h2>Stop mapdl<a class="headerlink" href="#stop-mapdl" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 20.577 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-01-geometry-04-primitives-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/ac5a6ef3d8c579e3f337f2f3f46c8cbb/04-primitives.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">04-primitives.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/e55238087dd993ba381e09bc638dd6eb/04-primitives.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">04-primitives.py</span></code></a></p>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-blc4">APDL Command: BLC4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-blc5">APDL Command: BLC5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-block">APDL Command: BLOCK</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-con4">APDL Command: CON4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-cone">APDL Command: CONE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-cyl4">APDL Command: CYL4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-cyl5">APDL Command: CYL5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-cylind">APDL Command: CYLIND</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-pcirc">APDL Command: PCIRC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-rectng">APDL Command: RECTNG</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-sph4">APDL Command: SPH4</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-sphere">APDL Command: SPHERE</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-sph5">APDL Command: SPH5</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apdl-command-torus">APDL Command: TORUS</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#stop-mapdl">Stop mapdl</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/examples/gallery_examples/01-geometry/04-primitives.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

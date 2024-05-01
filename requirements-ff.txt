@@ -1,0 +1,17 @@
+ansys-mapdl-core
+ansys-dpf-core
+ansys-dpf-post
+ansys-sphinx-theme
+pandas
+pypandoc
+pandasgui
+jupyterlab
+sphinx
+jupyter_sphinx
+sphinx_autodoc_typehints
+sphinx_copybutton
+sphinx_gallery
+sphinxemoji
+sphinx_reredirects
+sphinx_design
+sphinx-notfound-page

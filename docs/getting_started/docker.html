@@ -1,0 +1,953 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>MAPDL and Docker &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'getting_started/docker';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PyMAPDL and MacOS" href="macos.html" />
+    <link rel="prev" title="Versions and interfaces" href="versioning.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="project.html">Pymapdl Project</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_mapdl.html">Install MAPDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="install_pymapdl.html">Install PyMAPDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launcher.html">Launch PyMAPDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="learning.html">Learning PyMAPDL</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Frequently asked questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contribution.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="codespaces.html">Develop on Codespaces</a></li>
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="devcontainer.html">Develop on containers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="make_container.html">创建自己的 MAPDL docker 容器</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="versioning.html">Versions and interfaces</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">MAPDL and Docker</a></li>
+<li class="toctree-l1"><a class="reference internal" href="macos.html">PyMAPDL and MacOS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="wsl.html">Windows Subsystem for Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="using_julia.html">Julia and PyMAPDL</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Getting started</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">MAPDL and Docker</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="mapdl-and-docker">
+<span id="pymapdl-docker"></span><h1>MAPDL and Docker<a class="headerlink" href="#mapdl-and-docker" title="Link to this heading">#</a></h1>
+<p>您可以在任何操作系统的 Docker 容器中运行 MAPDL，并通过 PyMAPDL 与之连接。</p>
+<p>在 Docker（或 Singularity）等容器环境中运行 MAPDL 有几个优势：</p>
+<ul class="simple">
+<li><p>无论主机操作系统如何，环境始终如一</p></li>
+<li><p>便于携带和安装</p></li>
+<li><p>使用 Kubernetes 进行大规模集群部署</p></li>
+<li><p>通过容器化实现真正的应用程序隔离</p></li>
+</ul>
+<p>在 Docker 容器中运行 MAPDL 时，需要使用本地 Python 安装来连接该实例。</p>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading">#</a></h2>
+<p>您必须能够访问包含 MAPDL 的 Docker 镜像。有关如何创建自己的 Docker 镜像的更多信息，请参阅 <a class="reference internal" href="make_container.html#ref-make-container"><span class="std std-ref">创建自己的 MAPDL docker 容器</span></a>。</p>
+<p>创建 Docker 镜像并将其上传到注册表后，就可以开始在其他设备上提取和使用该镜像了。</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>MAPDL Docker 映像不允许在公共或免费访问的存储库或注册表中共享。这样做违反了 Ansys 政策。</p>
+</div>
+<section id="docker-github">
+<h3>配置 Docker 以访问 GitHub 私有注册表<a class="headerlink" href="#docker-github" title="Link to this heading">#</a></h3>
+<p>如果您创建了 Docker 镜像并将其上传到 GitHub 私有仓库，则必须使用个人访问令牌授权您的 Docker 安装来访问该私有软件包。</p>
+<p>有关创建具有 <code class="docutils literal notranslate"><span class="pre">packages</span> <span class="pre">read</span></code> 权限的 GitHub 个人访问令牌的信息，请参阅 GitHub 的 <a class="reference external" href="https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token">创建个人访问令牌</a> 。</p>
+<p>使用此命令将标记保存到文件中：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">echo</span> <span class="n">MY_GITHUB_TOKEN_WITH_PACKAGE_READ_PERMISSION</span> <span class="o">&gt;</span> <span class="n">GH_TOKEN</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p>这样就可以将令牌发送给 Docker，而不会在历史记录中留下令牌值。接下来，用以下代码授权 Docker 访问该版本库：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>GH_USERNAME=&lt;my-github-username&gt;
+cat GH_TOKEN.txt | docker login ghcr.io -u $GH_USERNAME --password-stdin
+</pre></div>
+</div>
+</section>
+</section>
+<section id="run-an-mapdl-docker-image">
+<span id="run-an-mapdl-image"></span><h2>Run an MAPDL Docker image<a class="headerlink" href="#run-an-mapdl-docker-image" title="Link to this heading">#</a></h2>
+<p>现在，你可以使用命令行 <a class="reference internal" href="#run-an-mapdl-image-using-docker-compose">docker compose file</a> 或脚本从 Docker 启动 MAPDL。</p>
+<p>您的 Docker 映像应具有有效的 MAPDL 许可证配置。最简单的方法是设置一个环境变量 <span class="target" id="index-0"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">ANSYSLMD_LICENSE_FILE</span></code>，指向一个有效的许可证服务器。
+这个环境变量可以包含在 Docker 镜像中。不过，我们不建议这样做，因为如果 Docker 映像泄露，它可能会暴露许可证服务器。建议的做法是在运行容器时设置该环境变量。</p>
+<p>要从托管在 <code class="docutils literal notranslate"><span class="pre">ghcr.io/myuser/myrepo/mymapdldockerimage</span></code> 的映像实例化 MAPDL Docker 容器，请使用以下示例中的代码。</p>
+<p><strong>On Windows</strong></p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">$env:ANSYSLMD_LICENSE_FILE=&quot;1055@MY_LICENSE_SERVER_IP&quot;</span>
+<span class="go">$env:LOCAL_MAPDL_PORT=50053</span>
+<span class="go">$env:MAPDL_DOCKER_REGISTRY_URL=&quot;ghcr.io/myuser/myrepo/mymapdldockerimage&quot;</span>
+
+<span class="go">docker run -e ANSYSLMD_LICENSE_FILE=$env:ANSYSLMD_LICENSE_FILE --restart always --name mapdl -p $env:LOCAL_MAPDL_PORT`:50052   $env:MAPDL_DOCKER_REGISTRY_URL -smp</span>
+</pre></div>
+</div>
+<p><strong>On Linux</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">ANSYSLMD_LICENSE_FILE</span><span class="o">=</span><span class="m">1055</span>@MY_LICENSE_SERVER_IP
+<span class="nv">LOCAL_MAPDL_PORT</span><span class="o">=</span><span class="m">50053</span>
+<span class="nv">MAPDL_DOCKER_REGISTRY_URL</span><span class="o">=</span>ghcr.io/myuser/myrepo/mymapdldockerimage
+docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANSYSLMD_LICENSE_FILE</span><span class="o">=</span><span class="nv">$ANSYSLMD_LICENSE_FILE</span><span class="w"> </span>--restart<span class="w"> </span>always<span class="w"> </span>--name<span class="w"> </span>mapdl<span class="w"> </span>-p<span class="w"> </span><span class="nv">$LOCAL_MAPDL_PORT</span>:50052<span class="w"> </span><span class="nv">$MAPDL_DOCKER_REGISTRY_URL</span><span class="w"> </span>-smp<span class="w"> </span>&gt;<span class="w"> </span>log.txt
+</pre></div>
+</div>
+<p>第一次实例化容器时，Docker 会登录注册表并提取所需的映像。这可能需要一些时间，具体取决于映像的大小。</p>
+<p>要重新运行，应使用此命令重启容器：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>start<span class="w"> </span>mapdl
+</pre></div>
+</div>
+<p>或者也可以删除容器，然后使用这些命令重新运行：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>mapdl
+
+docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANSYSLMD_LICENSE_FILE</span><span class="o">=</span><span class="nv">$ANSYSLMD_LICENSE_FILE</span><span class="w"> </span>--restart<span class="w"> </span>always<span class="w"> </span>--name<span class="w"> </span>mapdl<span class="w"> </span>-p<span class="w"> </span><span class="nv">$LOCAL_MAPDL_PORT</span>:50052<span class="w">   </span><span class="nv">$MAPDL_DOCKER_REGISTRY_URL</span><span class="w"> </span>-smp<span class="w"> </span>&gt;<span class="w"> </span>log.txt
+</pre></div>
+</div>
+<p>您可以添加 Docker 标志 <code class="docutils literal notranslate"><span class="pre">--rm</span></code> 以在退出时自动清理容器。</p>
+<p>上述命令会在当前目录下创建一个日志文件 (<code class="docutils literal notranslate"><span class="pre">log.txt</span></code>)。不过，如果不想创建该文件，可以删除 <code class="docutils literal notranslate"><span class="pre">&gt;</span> <span class="pre">log.txt</span></code>。
+在这种情况下，命令输出会重定向到控制台，在 Docker 映像退出之前，控制台一直处于阻塞状态。您可以通过在 <a class="reference external" href="https://docs.docker.com/engine/reference/run/">docker run</a>
+命令中添加 <code class="docutils literal notranslate"><span class="pre">-d</span></code> 将控制台从 Docker 容器输出中分离出来。（一定要在 Docker 镜像 URL 之前添加）。</p>
+<p>如果不想阻塞控制台，最好的办法是将输出导入一个文件，如前所述，这样就可以检查该文件的输出。</p>
+<p>请注意，MAPDL Docker 镜像的 gRPC 端口（ <code class="docutils literal notranslate"><span class="pre">50052</span></code> ）被映射到了不同的主机端口（ <code class="docutils literal notranslate"><span class="pre">50053</span></code> ），以避免与主机或其他 Docker 镜像上运行的本地 MAPDL 实例发生端口冲突。
+如果要同时运行多个模拟，还可以在不同端口启动更多 Docker 容器。</p>
+<p>当连接到远程 MAPDL Docker 镜像时，<a class="reference internal" href="../user_guide/pool.html#ref-pymapdl-pool"><span class="std std-ref">Create a pool of MAPDL instances</span></a> 模块不起作用。当连接到 Docker 容器时，该模块也不起作用。如果决定启动多个 MAPDL 实例，则必须自行管理这些实例。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>确保本地防火墙中的端口 <code class="docutils literal notranslate"><span class="pre">50053</span></code> 是开放的。</p>
+</div>
+<p>您可以向 MAPDL 提供额外的 MAPDL 命令行参数，只需将其附加到命令末尾即可。</p>
+<p>例如，可以使用 <code class="docutils literal notranslate"><span class="pre">-np</span></code> 开关增加处理器数量（最多不超过主机上的可用数量）：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>-e<span class="w"> </span><span class="nv">ANSYSLMD_LICENSE_FILE</span><span class="o">=</span><span class="nv">$ANSYSLMD_LICENSE_FILE</span><span class="w"> </span>--restart<span class="w"> </span>always<span class="w"> </span>-d<span class="w"> </span>--name<span class="w"> </span>mapdl<span class="w"> </span>-p<span class="w"> </span><span class="nv">$LOCAL_MAPDL_PORT</span>:50052<span class="w"> </span><span class="nv">$MAPDL_DOCKER_REGISTRY_URL</span><span class="w"> </span>-smp<span class="w"> </span>-np<span class="w"> </span><span class="m">8</span><span class="w"> </span>&gt;<span class="w"> </span>log.txt
+</pre></div>
+</div>
+<p>有关其他命令行参数，请参阅 <a class="reference internal" href="../api/_autosummary/ansys.mapdl.core.launcher.launch_mapdl.html#ansys.mapdl.core.launcher.launch_mapdl" title="ansys.mapdl.core.launcher.launch_mapdl"><code class="xref py py-func docutils literal notranslate"><span class="pre">launch_mapdl()</span></code></a> 函数说明中的 <em>Notes</em> 部分。</p>
+<p>您可以使用脚本文件（batch <code class="docutils literal notranslate"><span class="pre">&quot;.bat&quot;</span></code> 或 PowerShell <code class="docutils literal notranslate"><span class="pre">&quot;.ps&quot;</span></code> ）一次性运行前面的命令。</p>
+<p>启动 MAPDL 后，您应该会在控制台（或输出文件）中看到以下内容：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Start</span> <span class="n">GRPC</span> <span class="n">Server</span>
+
+<span class="c1">##############################</span>
+<span class="c1">### START GRPC SERVER      ###</span>
+<span class="c1">##############################</span>
+
+<span class="n">Server</span> <span class="n">Executable</span>   <span class="p">:</span> <span class="n">MapdlGrpc</span> <span class="n">Server</span>
+<span class="n">Server</span> <span class="n">listening</span> <span class="n">on</span> <span class="p">:</span> <span class="mf">0.0.0.0</span><span class="p">:</span><span class="mi">50052</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>请注意，控制台中指定的端口是 Docker 容器的内部端口。该端口已被映射到 <span class="target" id="index-1"></span><code class="xref std std-envvar docutils literal notranslate"><span class="pre">LOCAL_MAPDL_PORT</span></code> 环境变量指定的值。</p>
+</div>
+<section id="using-docker-compose-to-launch-mapdl">
+<span id="run-an-mapdl-image-using-docker-compose"></span><h3>Using <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> to launch MAPDL<a class="headerlink" href="#using-docker-compose-to-launch-mapdl" title="Link to this heading">#</a></h3>
+<p>你也可以使用 <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> 命令来启动配置在 <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> 文件中的 MAPDL。如果你想加载已经配置好的环境，或者想启动多个 MAPDL 或服务实例，这将非常有用。</p>
+<p>为方便起见， <a class="reference external" href="https://github.com/ansys/pymapdl/blob/main/docker">docker</a> 目录包含了配置好的 <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> 文件，你可以使用这些文件。</p>
+<p>建议使用 <a class="reference external" href="https://github.com/ansys/pymapdl/blob/main/docker/docker-compose.yml">docker-compose.yml</a> 文件。这是用于启动可远程连接的 MAPDL 实例的 <em>base</em> 配置文件。</p>
+</section>
+</section>
+<section id="connect-to-the-mapdl-container-from-python">
+<span id="pymapdl-connect-to-mapdl-container"></span><h2>Connect to the MAPDL container from Python<a class="headerlink" href="#connect-to-the-mapdl-container-from-python" title="Link to this heading">#</a></h2>
+<p>您可以按照 <a class="reference internal" href="launcher.html#connect-grpc-madpl-session"><span class="std std-ref">Connect to the local MAPDL instance</span></a> 中的指示连接到 MAPDL 实例。您无需指定 IP 地址，因为 Docker 会将端口映射到本地主机。</p>
+</section>
+<section id="id1">
+<h2>其他注意事项<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<section id="use-restart-policy-with-mapdl-products">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">--restart</span></code> policy with MAPDL products<a class="headerlink" href="#use-restart-policy-with-mapdl-products" title="Link to this heading">#</a></h3>
+<p>默认情况下，MAPDL 启动时会在工作目录中创建一个 <code class="docutils literal notranslate"><span class="pre">LOCK</span></code> 文件，正常退出时会删除该文件。在异常终止后启动 MAPDL 时，该文件用于避免覆盖数据库 (DB) 文件或结果 (RST) 文件等文件。</p>
+<p>由于这种行为，当在 <a class="reference external" href="https://docs.docker.com/engine/reference/run/">docker run</a> 命令中使用 Docker <code class="docutils literal notranslate"><span class="pre">--restart</span></code> 标志时，如果指定在异常终止后重新启动 Docker 映像，
+可能会在崩溃后进入无限循环。当出现异常终止（MAPDL 崩溃）时，工作目录中会保留 <code class="file docutils literal notranslate"><span class="pre">LOCK</span></code> 文件。由于 MAPDL 已退出，因此容器也会退出。</p>
+<p>这将触发 Docker <code class="docutils literal notranslate"><span class="pre">restart</span></code> 策略，该策略会尝试重新启动 MAPDL 容器和 MAPDL 进程。但由于存在 <code class="docutils literal notranslate"><span class="pre">LOCK</span></code> 文件，MAPDL 会退出，以避免覆盖上次崩溃的文件。这是一个无限循环的开始，Docker 会不断重启 MAPDL 容器，而 MAPDL 会不断退出以避免覆盖之前的文件。</p>
+<p>在这种情况下，不应使用 <code class="docutils literal notranslate"><span class="pre">--restart</span></code> 选项。如果确实需要使用该选项，可以避免 MAPDL 检查，并通过将 <code class="docutils literal notranslate"><span class="pre">ANSYS_LOCK</span></code> 环境变量设置为 <code class="docutils literal notranslate"><span class="pre">&quot;OFF&quot;</span></code> 来启动进程，从而创建 <code class="docutils literal notranslate"><span class="pre">LOCK</span></code> 文件。</p>
+<p>这段代码展示了如何在 <a class="reference external" href="https://docs.docker.com/engine/reference/run/">docker run</a> 命令中实现这一点：</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--restart<span class="w"> </span>always<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">ANSYSLMD_LICENSE_FILE</span><span class="o">=</span><span class="m">1055</span>@<span class="nv">$LICENSE_SERVER</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">ANSYS_LOCK</span><span class="o">=</span><span class="s2">&quot;OFF&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span><span class="m">50052</span>:50052<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span><span class="nv">$IMAGE</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>异常终止后获取有用文件<a class="headerlink" href="#id2" title="Link to this heading">#</a></h3>
+<p>在某些情况下，MAPDL 容器可能会在 MAPDL 进程异常终止后崩溃。在这种情况下，您可以使用 Docker 提供的工具检索日志文件和输出文件。</p>
+<p>首先，获取 Docker 容器名称：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">PS docker ps -a</span>
+<span class="go">CONTAINER ID   IMAGE                                   COMMAND                  CREATED          STATUS          PORTS                      NAMES</span>
+<span class="go">c14560bff70f   my.registry/myuser/mypackage/mapdl   &quot;/ansys_inc/ansys/bi…&quot;   9 seconds ago    Exited(137)    0.0.0.0:50053-&gt;50052/tcp   mapdl</span>
+</pre></div>
+</div>
+<p>然后使用该命令中的 <code class="docutils literal notranslate"><span class="pre">name</span></code>：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">PS docker exec -it mapdl /bin/bash</span>
+</pre></div>
+</div>
+<p>该命令执行容器的命令 shell (<code class="docutils literal notranslate"><span class="pre">/bin/bash</span></code>)，并将您的当前终端连接到它（交互式 <code class="docutils literal notranslate"><span class="pre">-it</span></code> ）。</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="gp">PS C:\Users\user&gt; </span><span class="n">docker</span> <span class="n">exec</span> <span class="n">-it</span> <span class="n">mapdl</span> <span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">bash</span>
+<span class="go">[root@c14560bff70f /]#</span>
+</pre></div>
+</div>
+<p>现在，你可以在 Docker 容器中输入命令，并在其中导航。</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="gp">PS C:\Users\user&gt; </span><span class="n">docker</span> <span class="n">exec</span> <span class="n">-it</span> <span class="n">mapdl</span> <span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">bash</span>
+<span class="go">[root@c14560bff70f /]# ls</span>
+<span class="go">anaconda-post.log  cleanup-ansys-c14560bff70f-709.sh  file0.err   file1.err  file1.page  file2.out   file3.log   home   media  proc  sbin  tmp</span>
+<span class="go">ansys_inc          dev                                file0.log   file1.log  file2.err   file2.page  file3.out   lib    mnt    root  srv   usr</span>
+<span class="go">bin                etc                                file0.page  file1.out  file2.log   file3.err   file3.page  lib64  opt    run   sys   var</span>
+</pre></div>
+</div>
+<p>然后，您可以记下要检索的文件。例如，您可能希望检索错误文件和输出文件（ <code class="docutils literal notranslate"><span class="pre">file*.err</span></code> 和 <code class="docutils literal notranslate"><span class="pre">file*.out</span></code> ）。</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">exit</span></code> 命令退出容器终端：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">[root@c14560bff70f /]# exit</span>
+<span class="go">exit</span>
+<span class="gp gp-VirtualEnv">(base)</span> <span class="gp">PS C:\Users\user&gt;</span>
+</pre></div>
+</div>
+<p>然后，你就可以使用 <a class="reference external" href="https://docs.docker.com/engine/reference/commandline/cp/">docker cp</a> 命令复制注意到的文件：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">docker cp mapdl:/file0.err .</span>
+</pre></div>
+</div>
+<p>该命令复制当前目录下的文件。您可以使用第二个参数指定不同的目的。</p>
+<p>如果要检索多个文件，最有效的方法是回到 Docker 容器内部：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="gp">PS C:\Users\user&gt; </span><span class="n">docker</span> <span class="n">exec</span> <span class="n">-it</span> <span class="n">mapdl</span> <span class="p">/</span><span class="n">bin</span><span class="p">/</span><span class="n">bash</span>
+<span class="go">[root@c14560bff70f /]#</span>
+</pre></div>
+</div>
+<p>创建一个文件夹，在其中复制所有需要的文件：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">[root@c14560bff70f /]# mkdir -p /mapdl_logs</span>
+<span class="go">[root@c14560bff70f /]# cp -f /file*.out /mapdl_logs</span>
+<span class="go">[root@c14560bff70f /]# cp -f /file*.err /mapdl_logs</span>
+<span class="go">[root@c14560bff70f /]# ls mapdl_logs/</span>
+<span class="go">file0.err  file1.err  file1.out  file2.err  file2.out  file3.err  file3.out</span>
+</pre></div>
+</div>
+<p>然后一次性复制整个文件夹的内容：</p>
+<div class="highlight-pwsh-session notranslate"><div class="highlight"><pre><span></span><span class="go">docker cp mapdl:/mapdl_logs/. .</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#requirements">Requirements</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#docker-github">配置 Docker 以访问 GitHub 私有注册表</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-an-mapdl-docker-image">Run an MAPDL Docker image</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#using-docker-compose-to-launch-mapdl">Using <code class="docutils literal notranslate"><span class="pre">docker-compose</span></code> to launch MAPDL</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-to-the-mapdl-container-from-python">Connect to the MAPDL container from Python</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">其他注意事项</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-restart-policy-with-mapdl-products">Use <code class="docutils literal notranslate"><span class="pre">--restart</span></code> policy with MAPDL products</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">异常终止后获取有用文件</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/getting_started/docker.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

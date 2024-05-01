@@ -1,0 +1,117 @@
+
+
+.. _sphx_glr_examples_gallery_examples_01-geometry:
+
+Geometry examples
+=================
+这些示例演示了如何使用 PyMAPDL 创建基本几何图形。
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何使用关键点命令创建基本几何体。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/01-geometry/images/thumb/sphx_glr_00-keypoints_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_01-geometry_00-keypoints.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Keypoints</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示如何使用“线”命令创建基本几何体。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/01-geometry/images/thumb/sphx_glr_01-lines_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_01-geometry_01-lines.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Lines</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示如何使用 area 命令创建基本几何体。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/01-geometry/images/thumb/sphx_glr_02-areas_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_01-geometry_02-areas.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Areas</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何使用体积命令创建基本几何体。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/01-geometry/images/thumb/sphx_glr_03-volumes_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_01-geometry_03-volumes.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Volumes</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="此示例显示用于创建 volume 的不同命令，例如块、圆柱体等。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/01-geometry/images/thumb/sphx_glr_04-primitives_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_01-geometry_04-primitives.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Primitives</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/01-geometry/00-keypoints
+   /examples/gallery_examples/01-geometry/01-lines
+   /examples/gallery_examples/01-geometry/02-areas
+   /examples/gallery_examples/01-geometry/03-volumes
+   /examples/gallery_examples/01-geometry/04-primitives
+

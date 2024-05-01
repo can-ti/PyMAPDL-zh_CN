@@ -1,0 +1,1010 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>Using Python to code UPF subroutines &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/thebelab-helper.js"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'user_guide/upf';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Harmonic analysis using the Krylov method" href="krylov_method.html" />
+    <link rel="prev" title="File explorer overview" href="xpl.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="mapdl.html">PyMAPDL language and usage</a></li>
+<li class="toctree-l1"><a class="reference internal" href="convert.html">Translate scripts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mesh_geometry.html">Mesh and geometry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="plotting.html">Interactive plotting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="parameters.html">Setting and retrieving parameters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="components.html">Managing components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="post.html">Postprocessing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cli.html">PyMAPDL command line interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mapdl_examples.html">ANSYS APDL interactive control examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="database.html">Access MAPDL database</a></li>
+<li class="toctree-l1"><a class="reference internal" href="math.html">PyAnsys Math overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pool.html">Create a pool of MAPDL instances</a></li>
+<li class="toctree-l1"><a class="reference internal" href="xpl.html">File explorer overview</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Python to code UPF subroutines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="krylov_method.html">Harmonic analysis using the Krylov method</a></li>
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="troubleshoot.html">Troubleshooting PyMAPDL</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">User guide</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">Using Python to code UPF subroutines</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="using-python-to-code-upf-subroutines">
+<span id="python-upf"></span><h1>Using Python to code UPF subroutines<a class="headerlink" href="#using-python-to-code-upf-subroutines" title="Link to this heading">#</a></h1>
+<p>作为 C 和 Fortran 等编译语言的替代，您可以使用 Python 语言来编写用户可编程子程序。已记录的 UPF 子程序子集支持 Python UPF 功能。更多信息，请参阅 <a class="reference internal" href="#supported-upf-subroutines">Supported UPF subroutines</a> 。</p>
+<p>使用此功能前，您必须安装 Python 发行版。支持 Python 3.8 至 Python 3.12。</p>
+<p>Python UPF 仅支持 Linux。</p>
+<p>强烈建议您根据 <a class="reference internal" href="#python-upf-examples">Python UPF examples</a> 中的一个示例开始编写代码。在 Python 代码中，您可以使用标准 Python 库，如 NumPy。</p>
+<p>这些主题可供选择：</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#supported-upf-subroutines">Supported UPF subroutines</a></p></li>
+<li><p><a class="reference internal" href="#python-upf-methodology">Python UPF methodology</a></p></li>
+<li><p><a class="reference internal" href="#accessing-the-database-from-the-python-code">Accessing the database from the Python code</a></p></li>
+<li><p><a class="reference internal" href="#python-upf-limitations">Python UPF limitations</a></p></li>
+<li><p><a class="reference internal" href="#python-upf-examples">Python UPF examples</a></p></li>
+</ul>
+<section id="supported-upf-subroutines">
+<h2>Supported UPF subroutines<a class="headerlink" href="#supported-upf-subroutines" title="Link to this heading">#</a></h2>
+<p>在所有可用的 UPF 子程序中，有一部分支持 Python 编码。下表列出了支持的子程序。</p>
+<p><strong>Table 1: Python support for subroutines</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>Subroutine</strong></p></th>
+<th class="head"><p><strong>Fortran description</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td colspan="2"><p><strong>Material behavior</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UserMat</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UserMat</span></code> (Creating Your Own Material Model)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UserMatTh</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UserMatTh</span></code> (Creating Your Own Thermal Material Model)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UserHyper</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UserHyper</span></code> (Writing Your Own Isotropic Hyperelasticity Laws)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UserCreep</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UserCreep</span></code> (Defining Creep Material Behavior)</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Modifying and Monitoring Elements</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UsrShift</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UsrShift</span></code> (Calculating Pseudotime Time Increment)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UTimeInc</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UTimeInc</span></code> (Overriding the Program-Determined Time Step)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">UCnvrg</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">UCnvrg</span></code> (Overriding the Program-Determined Convergence)</p></td>
+</tr>
+<tr class="row-odd"><td colspan="2"><p><strong>Customizing loads</strong></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">usrefl</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">usrefl</span></code> (Changing Scalar Fields to User-Defined Values)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">userpr</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">userpr</span></code> (Changing Element Pressure Information)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">usercv</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">usercv</span></code> (Changing Element Face Convection Surface Information)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">userfx</span></code></p></td>
+<td><p>Subroutine <code class="docutils literal notranslate"><span class="pre">userfx</span></code> (Changing Element Face Heat Flux Surface Information)</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p><strong>Accessing subroutines</strong></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">UanBeg</span></code> / <code class="docutils literal notranslate"><span class="pre">UanFin</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">USolBeg</span></code> / <code class="docutils literal notranslate"><span class="pre">USolFin</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">ULdBeg</span></code> / <code class="docutils literal notranslate"><span class="pre">ULdFin</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">UItBeg</span></code> / <code class="docutils literal notranslate"><span class="pre">UItFin</span></code></p>
+<p><code class="docutils literal notranslate"><span class="pre">USsBeg</span></code> / <code class="docutils literal notranslate"><span class="pre">USsFin</span></code></p>
+</td>
+<td><p>Access at the beginning and end of various operations</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="python-upf-methodology">
+<h2>Python UPF methodology<a class="headerlink" href="#python-upf-methodology" title="Link to this heading">#</a></h2>
+<p>编码 Python UPF 与使用 C/C++ 或 Fortran 等编译语言不同，主要体现在 API 方面。
+由于 <a class="reference external" href="https://grpc.io/">gRPC 技术</a> 用于处理 Python 进程和 Mechanical APDL 进程之间的通信和数据交换，因此您需要了解该功能处理数据序列化和反序列化的方式。</p>
+<p>The main difference is in the subroutine arguments. Instead of having a full list of
+arguments as described for each of the subroutines, there are only two: the request
+object (for inputs), and the response object (for outputs). If an argument is both input
+and output of the subroutine, it is part of both objects. |
+主要区别在于子程序参数。每个子程序都有一个完整的参数列表，而现在只有两个：请求对象（用于输入）和响应对象（用于输出）。
+如果一个参数既是子程序的输入，又是子程序的输出，那么它就是这两个对象的一部分。</p>
+<p>The description of the request object and the response object can be found in the
+<code class="docutils literal notranslate"><span class="pre">MapdlUser.proto</span></code> file stored in this installation directory: | 关于请求对象和响应对象的说明，可在本安装目录下的 <code class="docutils literal notranslate"><span class="pre">MapdlUser.proto</span></code> 文件中找到：</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Ansys Inc\vXXX\ansys\syslib\ansGRPC\User</span>
+</pre></div>
+</div>
+<p>其中 <code class="docutils literal notranslate"><span class="pre">XXX</span></code> 是您使用的 Mechanical APDL 版本。例如， <code class="docutils literal notranslate"><span class="pre">222</span></code> 表示 Mechanical APDL 2022R2。</p>
+<p>首先，从这个模板开始创建一个 Python 文件：</p>
+<p><strong>my_upf.py</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">grpc</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">mapdl</span> <span class="kn">import</span> <span class="o">*</span>
+
+
+<span class="k">class</span> <span class="nc">MapdlUserService</span><span class="p">(</span><span class="n">MapdlUser_pb2_grpc</span><span class="o">.</span><span class="n">MapdlUserServiceServicer</span><span class="p">):</span>
+    <span class="c1">#   #################################################################</span>
+    <span class="k">def</span> <span class="nf">UAnBeg</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; ======================================= &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; &gt;&gt; Inside the PYTHON UAnBeg routine  &lt;&lt; &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot; ======================================= </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">google_dot_protobuf_dot_empty__pb2</span><span class="o">.</span><span class="n">_EMPTY</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">upf</span><span class="o">.</span><span class="n">launch</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>请注意，Mechanical APDL 会自动安装 Mechanical APDL Python 包（一组 Python 函数），以处理 Mechanical APDL 和 Python 环境之间的连接。必须导入每个 Python UPF：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">mapdl</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>The preceding example redefines the <cite>UAnBeg</cite> routine and prints a
+customized banner. This file must be in the same directory as the input file. |
+上例重新定义了 <cite>UAnBeg</cite> 例程，并打印了一个定制的横幅。该文件必须与输入文件位于同一目录。</p>
+<p>To use this Python UPF, you must add the Mechanical APDL <code class="docutils literal notranslate"><span class="pre">/UPF</span></code> command to your
+input file (<code class="docutils literal notranslate"><span class="pre">my\_inp.dat</span></code>). |
+要使用 Python UPF，必须在输入文件（ <code class="docutils literal notranslate"><span class="pre">my\_inp.dat</span></code> ）中添加 Mechanical APDL <code class="docutils literal notranslate"><span class="pre">/UPF</span></code> 命令。</p>
+<div class="highlight-apdl notranslate"><div class="highlight"><pre><span></span><span class="k">/UPF</span><span class="p">,</span><span class="s1">&#39;my_upf.py&#39;</span>
+
+<span class="c">! The UAnBeg UPF must be activated by using the USRCAL APDL command</span>
+
+<span class="k">USRCAL</span><span class="p">,</span><span class="nv">UANBEG</span>
+</pre></div>
+</div>
+<p>该命令会被 Mechanical APDL 启动器捕获，这样当 Mechanical APDL 进程启动时，Python gRPC 服务器就会启动并运行。</p>
+<p>使用此输入文件启动 Mechanical APDL 时，会看到以下打印输出，表明 Mechanical APDL 检测到 Python UPF 指令并启动了 Python 服务器：</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">Processing &quot;/upf&quot; found in input file &quot;my_inp.dat&quot;</span>
+
+<span class="go">Python UPF Detected</span>
+
+<span class="go">PYTHON VERSION : 3.10</span>
+<span class="go">&gt;&gt;</span>
+<span class="go">&gt;&gt; START PYTHON GRPC SERVER</span>
+<span class="go">&gt;&gt;</span>
+<span class="go">&gt;&gt; User Functions Python File :  my_upf.py</span>
+<span class="go">&gt;&gt;</span>
+<span class="go">&gt;&gt; Server started on port [50054]</span>
+</pre></div>
+</div>
+<p>在 Mechanical APDL 进程中， 您会看到以下 Python 打印输出：</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">RUN SETUP PROCEDURE FROM FILE= /ansys_inc/v212/ansys/apdl/start.ans</span>
+<span class="go">=======================================</span>
+<span class="go">&gt;&gt; Inside the PYTHON UAnBeg routine  &lt;&lt;</span>
+<span class="go">=======================================</span>
+</pre></div>
+</div>
+<p>在进程的最后，Python 服务器会自动关闭：</p>
+<div class="highlight-output notranslate"><div class="highlight"><pre><span></span><span class="go">|-----------------------------------------------------------------|</span>
+<span class="go">|                                                                 |</span>
+<span class="go">|   CP Time      (sec) =          0.326       Time  =  10:40:24   |</span>
+<span class="go">|   Elapsed Time (sec) =          2.000       Date  =  03/11/2021 |</span>
+<span class="go">|                                                                 |</span>
+<span class="go">*-----------------------------------------------------------------*</span>
+
+<span class="go">&gt;&gt; We shutdown Python Server(s)</span>
+</pre></div>
+</div>
+</section>
+<section id="accessing-the-database-from-the-python-code">
+<h2>Accessing the database from the Python code<a class="headerlink" href="#accessing-the-database-from-the-python-code" title="Link to this heading">#</a></h2>
+<p>在 UPF 例程中，您可能需要以 只读/写 模式访问 Mechanical APDL 数据库。</p>
+<p>在 Python 代码中，您可以创建与 DB 服务器的连接。该命令必须只调用一次，这样就可以保护基于静态变量值的调用：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">grpc</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">from</span> <span class="nn">mapdl</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">firstcall</span> <span class="o">=</span> <span class="mi">1</span>
+
+
+<span class="k">class</span> <span class="nc">MapdlUserService</span><span class="p">(</span><span class="n">MapdlUser_pb2_grpc</span><span class="o">.</span><span class="n">MapdlUserServiceServicer</span><span class="p">):</span>
+    <span class="c1">#   ###############################################################</span>
+    <span class="k">def</span> <span class="nf">UserMat</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+        <span class="k">global</span> <span class="n">firstcall</span>
+
+        <span class="k">if</span> <span class="n">firstcall</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&gt;&gt; Connection to the MAPDL DB Server</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">db</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+            <span class="n">firstcall</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="c1"># continuation of the python function</span>
+        <span class="c1"># ...</span>
+</pre></div>
+</div>
+<p>一旦初始化了 DB 连接，就可以以 只读/写 模式访问 Mechanical APDL 实例的数据库。</p>
+<p>在访问 Mechanical APDL 数据库中记录的函数中，有一部分已经公开，以便从 Python 代码中调用。下表描述了已公开的函数。</p>
+<p><strong>Table 2. Supported database access functions</strong></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head" colspan="2"><p><strong>Supported database access functions</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.start()</span></code></p></td>
+<td><p>Initializes the connection with a running Mechanical APDL instance. The DB Server is automatically started in Mechanical APDL if a <strong>/UPF</strong> command with a Python file has been detected.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.stop()</span></code></p></td>
+<td><p>Closes the connection with the DB Server.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.ndnext(next)</span></code></p></td>
+<td><p>Equivalent to the function described in function <code class="docutils literal notranslate"><span class="pre">ndnext</span></code> (Getting the Next Node Number)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.ndinqr(ind,</span> <span class="pre">key)</span></code></p></td>
+<td><p>Equivalent to the function described in function <code class="docutils literal notranslate"><span class="pre">ndinqr</span></code> (Getting Information About a Node)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.getnod(inod)</span></code></p></td>
+<td><p>Equivalent to the function described in function <code class="docutils literal notranslate"><span class="pre">getnod</span></code> (Getting a Nodal Point)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.putnod(inod,</span> <span class="pre">x,</span> <span class="pre">y,</span> <span class="pre">z)</span></code></p></td>
+<td><p>Equivalent to the function described in function <code class="docutils literal notranslate"><span class="pre">putnod</span></code> (Storing a Node)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.elnext(ielm)</span></code></p></td>
+<td><p>Equivalent to the function described in function <code class="docutils literal notranslate"><span class="pre">elnext</span></code> (Getting the Number of the Next Element)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.getelem(ielm)</span></code></p></td>
+<td><p>Equivalent to the function described in function <code class="docutils literal notranslate"><span class="pre">elmget</span></code> (Getting an Element’s Attributes and Nodes)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.get_ElmInfo(inquire)</span></code></p></td>
+<td><p>Equivalent to the function <code class="docutils literal notranslate"><span class="pre">get\_ElmInfo</span></code> described in accessing Solution and Material Data</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db.get_ElmData(kchar,</span> <span class="pre">elemId,</span> <span class="pre">kMatRecPt,</span> <span class="pre">ncomp,</span> <span class="pre">vect)</span></code></p></td>
+<td><p>Equivalent to the function <code class="docutils literal notranslate"><span class="pre">get\_ElmData</span></code> described in accessing Solution and Material Data</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">db.putElmData(inquire,</span> <span class="pre">elemId,</span> <span class="pre">kIntg,</span> <span class="pre">nvect,</span> <span class="pre">vect)</span></code></p></td>
+<td><p>Equivalent to the function <code class="docutils literal notranslate"><span class="pre">put\_ElmData</span></code> described in accessing Solution and Material Data</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="python-upf-limitations">
+<h2>Python UPF limitations<a class="headerlink" href="#python-upf-limitations" title="Link to this heading">#</a></h2>
+<p>Python UPF 功能有这些限制：</p>
+<ul class="simple">
+<li><p>目前不支持分布式 Ansys。必须在命令行中指定 <code class="docutils literal notranslate"><span class="pre">-smp</span></code> 选项，以确保 Mechanical APDL 在共享内存处理模式下运行。</p></li>
+<li><p>Python UPF 仅适用于 Linux 平台。</p></li>
+</ul>
+</section>
+<section id="python-upf-examples">
+<h2>Python UPF examples<a class="headerlink" href="#python-upf-examples" title="Link to this heading">#</a></h2>
+<p>以下 Python UPF 示例位于 <a class="reference internal" href="../examples/extended_examples/Python_UPF/python_upf_examples.html#python-upf-examples"><span class="std std-ref">UPF in PyMAPDL</span></a> 中：</p>
+<ul class="simple">
+<li><p>Python <cite>UserMat</cite> subroutine</p></li>
+<li><p>Python <cite>UsrShift</cite> subroutine</p></li>
+<li><p>Python <cite>UserHyper</cite> subroutine</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#supported-upf-subroutines">Supported UPF subroutines</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-upf-methodology">Python UPF methodology</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#accessing-the-database-from-the-python-code">Accessing the database from the Python code</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-upf-limitations">Python UPF limitations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-upf-examples">Python UPF examples</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/user_guide/upf.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

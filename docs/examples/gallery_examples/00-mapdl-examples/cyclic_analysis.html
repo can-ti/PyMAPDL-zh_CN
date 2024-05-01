@@ -1,0 +1,1525 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>循环对称分析 &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../../../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/00-mapdl-examples/cyclic_analysis';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="静态循环分析" href="cyclic_static.html" />
+    <link rel="prev" title="接触单元示例" href="contact_elements.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../../../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../../../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../../../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../devportal.html">PyMAPDL Developer Portal articles</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/verif-manual/index.html">Verification Manual</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/technology_showcase_examples/index.html">Technology Showcases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extended_examples/index.html">Extended examples</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Full examples using PyMAPDL</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2d_magnetostatic_solenoid-BodyFlux_Averaging.html">2D 静磁螺线管分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_plate_with_a_hole.html">MAPDL 2D 平面应力集中分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_pressure_vessel.html">2D 压力容器分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3d_notch.html">缺口板的 3D 应力集中分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3d_plate_thermal.html">pyMAPDL 基本热力学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acoustic_analysis.html">3D 声学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_dpf_example.html">使用 PyMAPDL 的 DPF-Core 基本用法</a></li>
+
+
+
+
+
+<li class="toctree-l2"><a class="reference internal" href="bracket_static.html">角钢支架的静态分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="composite_dcb.html">基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact_elements.html">接触单元示例</a></li>
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">循环对称分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_static.html">静态循环分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exhaust_manifold_thermal_stress.html">排气歧管的热结构分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">绘图和网格访问</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lathe_cutter.html">车床刀具结构分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapdl_3d_beam.html">MAPDL 3D Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapdl_beam.html">MAPDL 2D Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modal_beam.html">MAPDL 梁模态分析示例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="path_operations.html">PyMAPDL 和 MAPDL 中的路径插值操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressure_vessel.html">压力容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyvista_mesh.html">PyVista 网格集成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slashmap_cfx_mapping.html">将 CFX 压力数据映射到结构叶片</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spotweld.html">Running an input file - spotweld SHELL181 example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torsional_load.html">Torsional load on a bar using SURF154 elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transient_thermal.html">瞬态热力学分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01-geometry/index.html">Geometry examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-tips-n-tricks/index.html">Miscellaneous examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03-general-fea/index.html">Academic finite element examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Full examples using PyMAPDL</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">循环对称分析</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-00-mapdl-examples-cyclic-analysis-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="ref-cyclic-analysis-example">
+<span id="sphx-glr-examples-gallery-examples-00-mapdl-examples-cyclic-analysis-py"></span><span id="id1"></span><h1>循环对称分析<a class="headerlink" href="#ref-cyclic-analysis-example" title="Link to this heading">#</a></h1>
+<p>本示例使用循环扇形的参数几何创建了一个叶盘，然后对该循环扇形进行模态分析。
+然后，我们使用传统的 <a class="reference external" href="https://readerdocs.pyansys.com/">MAPDL reader</a> 对结果进行后处理，最后使用参数建模器生成另一个循环模型。</p>
+<p>我们的第一项任务是创建一个包含 7 个扇区的简单循环模型。</p>
+<img alt="../../../_images/cyclic_disc.png" src="../../../_images/cyclic_disc.png" />
+<p>首先，将 MAPDL 作为服务启动。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pyvista</span> <span class="k">as</span> <span class="nn">pv</span>
+
+<span class="kn">from</span> <span class="nn">ansys.mapdl.core</span> <span class="kn">import</span> <span class="n">launch_mapdl</span>
+
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">()</span>
+</pre></div>
+</div>
+<section id="create-the-cyclic-sector">
+<h2>Create the Cyclic Sector<a class="headerlink" href="#create-the-cyclic-sector" title="Link to this heading">#</a></h2>
+<p>为我们的循环模型创建一个 “扇形”。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">gen_sector</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sectors</span></a></a><span class="p">):</span> <span class="c1"># 这里 `mapdl` 竟然可以当作一个函数里的参数？ ————ff</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;在 MAPDL 中生成一个扇形。&quot;&quot;&quot;</span>
+
+    <span class="c1"># 厚度</span>
+    <span class="n">thickness</span> <span class="o">=</span> <span class="mf">0.003</span>  <span class="c1"># 单位：m</span>
+    <span class="n">arc_end</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">pi</span></a></a> <span class="o">/</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sectors</span></a></a>
+    <span class="n">arc_cent</span> <span class="o">=</span> <span class="n">arc_end</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="c1"># 半径</span>
+    <span class="n">rad</span> <span class="o">=</span> <span class="mf">0.01</span>  <span class="c1"># m</span>
+    <span class="n">arc</span> <span class="o">=</span> <a href="https://docs.pyvista.org/version/stable/api/utilities/_autosummary/pyvista.CircularArc.html#pyvista.CircularArc" title="pyvista.CircularArc" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-function"><a href="https://docs.pyvista.org/version/stable/api/utilities/_autosummary/pyvista.CircularArc.html#pyvista.CircularArc" title="pyvista.CircularArc" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-function"><span class="n">pv</span><span class="o">.</span><span class="n">CircularArc</span></a></a><span class="p">(</span>
+        <span class="p">[</span><span class="n">rad</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a></a><span class="p">(</span><span class="n">arc_end</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a></a><span class="p">(</span><span class="n">arc_end</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+        <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="c1"># 内圆</span>
+    <span class="n">kp_begin</span> <span class="o">=</span> <span class="p">[</span><span class="n">rad</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">kp_end</span> <span class="o">=</span> <span class="p">[</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a></a><span class="p">(</span><span class="n">arc_end</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a></a><span class="p">(</span><span class="n">arc_end</span><span class="p">)</span> <span class="o">*</span> <span class="n">rad</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">kp_center</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+
+    <span class="c1"># 外圆</span>
+    <span class="n">out_rad</span> <span class="o">=</span> <span class="mf">5.2e-2</span>
+
+    <span class="c1"># 求出角度，以获得末端相同的弧长</span>
+    <span class="n">cent_ang</span> <span class="o">=</span> <span class="n">arc</span><span class="o">.</span><span class="n">length</span> <span class="o">/</span> <span class="n">out_rad</span> <span class="o">/</span> <span class="mi">2</span>
+
+    <span class="c1"># 内圈</span>
+    <span class="n">kp_beg_outer</span> <span class="o">=</span> <span class="p">[</span>
+        <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a></a><span class="p">(</span><span class="n">arc_cent</span> <span class="o">-</span> <span class="n">cent_ang</span><span class="p">)</span> <span class="o">*</span> <span class="n">out_rad</span><span class="p">,</span>
+        <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a></a><span class="p">(</span><span class="n">arc_cent</span> <span class="o">-</span> <span class="n">cent_ang</span><span class="p">)</span> <span class="o">*</span> <span class="n">out_rad</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+    <span class="p">]</span>
+    <span class="n">kp_end_outer</span> <span class="o">=</span> <span class="p">[</span>
+        <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">cos</span></a></a><span class="p">(</span><span class="n">arc_cent</span> <span class="o">+</span> <span class="n">cent_ang</span><span class="p">)</span> <span class="o">*</span> <span class="n">out_rad</span><span class="p">,</span>
+        <a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ufunc.html#numpy.ufunc" title="numpy.ufunc" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">np</span><span class="o">.</span><span class="n">sin</span></a></a><span class="p">(</span><span class="n">arc_cent</span> <span class="o">+</span> <span class="n">cent_ang</span><span class="p">)</span> <span class="o">*</span> <span class="n">out_rad</span><span class="p">,</span>
+        <span class="mi">0</span><span class="p">,</span>
+    <span class="p">]</span>
+
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">kp_center</span><span class="p">)</span> <span class="c1"># 这里*kp_center 将 kp_center 列表中的元素拆分为单独的参数传递给 mapdl.k 函数。</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">kp_begin</span><span class="p">)</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">kp_end</span><span class="p">)</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">kp_beg_outer</span><span class="p">)</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">k</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">*</span><span class="n">kp_end_outer</span><span class="p">)</span>
+
+    <span class="c1"># inner arc</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">l</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># left line</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">l</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># right line</span>
+    <span class="n">lnum_inter</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">l</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>  <span class="c1"># internal line</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">al</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+    <span class="c1"># outer &quot;blade&quot;</span>
+    <span class="n">lnum</span> <span class="o">=</span> <span class="p">[</span><span class="n">lnum_inter</span><span class="p">,</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">l</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">l</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">l</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)]</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">al</span><span class="p">(</span><span class="o">*</span><span class="n">lnum</span><span class="p">)</span>
+
+    <span class="c1"># 按 ``厚度`` 在 Z 方向挤出模型</span>
+    <span class="n">mapdl</span><span class="o">.</span><span class="n">vext</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <span class="n">dz</span><span class="o">=</span><span class="n">thickness</span><span class="p">)</span>
+
+<span class="c1"># 生成 7 扇形模型中的一个扇形</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sectors</span></a></a> <span class="o">=</span> <span class="mi">7</span>
+<span class="n">gen_sector</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sectors</span></a></a><span class="p">)</span>
+
+<span class="c1"># Volume plot</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vplot</span><span class="p">()</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_cyclic_analysis_001.png" srcset="../../../_images/sphx_glr_cyclic_analysis_001.png" alt="cyclic analysis" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_cyclic_analysis_002.png" srcset="../../../_images/sphx_glr_cyclic_analysis_002.png" alt="cyclic analysis" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_cyclic_analysis_003.png" srcset="../../../_images/sphx_glr_cyclic_analysis_003.png" alt="cyclic analysis" class = "sphx-glr-multi-img"/></li>
+</ul>
+</section>
+<section id="make-the-model-cyclic">
+<h2>Make the Model Cyclic<a class="headerlink" href="#make-the-model-cyclic" title="Link to this heading">#</a></h2>
+<p>运行 <code class="xref py py-func docutils literal notranslate"><span class="pre">Mapdl.cyclic()</span></code> 使模型循环运行</p>
+<p>请注意扇形的数量是如何匹配的</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyclic</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Expected Sectors: </span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">sectors</span></a></a><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Expected Sectors: 7
+USE EXISTING MODEL FOR CYCLIC SYMMETRY
+
+ ******************************************************
+ ****** COMPUTED QUANTITIES ***************************
+ ******************************************************
+ *  NUMBER OF SECTORS =                  7            *
+ *  SECTOR ANGLE =                  51.429            *
+ *  CYCLIC COORDINATE SYSTEM =           1            *
+ *  EDGE COMPONENTS CONTAIN AREAS                     *
+ *  LOW  EDGE COMPONENT = CYCLIC_M01L       MATCHED   *
+ *  HIGH EDGE COMPONENT = CYCLIC_M01H                 *
+ ******************************************************
+</pre></div>
+</div>
+</section>
+<section id="generate-the-mesh">
+<h2>Generate the mesh<a class="headerlink" href="#generate-the-mesh" title="Link to this heading">#</a></h2>
+<p>使用四面体 SOLID186 生成有限元网格。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 单元大小为 0.001</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">esize</span></a></a> <span class="o">=</span> <span class="mf">0.001</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">186</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">esize</span></a></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">esize</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsweep</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># 绘制有限元网格</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eplot</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_cyclic_analysis_004.png" srcset="../../../_images/sphx_glr_cyclic_analysis_004.png" alt="cyclic analysis" class = "sphx-glr-single-img"/></section>
+<section id="apply-material-properties">
+<h2>Apply Material Properties<a class="headerlink" href="#apply-material-properties" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义一种材料（公称钢，单位为 SI，国际单位制）</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;EX&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">210e9</span><span class="p">)</span>  <span class="c1"># Elastic moduli in Pa (kg/(m*s**2))</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;DENS&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7800</span><span class="p">)</span>  <span class="c1"># Density in kg/m3</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;NUXY&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># Poisson&#39;s Ratio</span>
+
+<span class="c1"># 将其应用于所有元素</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">emodif</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;MAT&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MODIFY ALL SELECTED ELEMENTS TO HAVE  MAT  =         1
+</pre></div>
+</div>
+</section>
+<section id="run-the-modal-analysis">
+<h2>Run the Modal Analysis<a class="headerlink" href="#run-the-modal-analysis" title="Link to this heading">#</a></h2>
+<p>让我们获取前 10 阶模态。请注意，这实际上是根据循环边界条件计算 <code class="docutils literal notranslate"><span class="pre">(扇区/2)*nmode</span></code> 。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">modal_analysis</span><span class="p">(</span><span class="n">nmode</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">freqb</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>*** NOTE ***                            CP =       0.438   TIME= 00:30:02
+ The automatic domain decomposition logic has selected the CYCHI domain
+ decomposition method with 1 processes per harmonic index solution.
+
+ *** NOTE ***                            CP =       0.438   TIME= 00:30:02
+ There is no title defined for this analysis.
+
+ *** WARNING ***                         CP =       0.500   TIME= 00:30:02
+ No constraints have been defined using the D command.
+
+
+
+   D I S T R I B U T E D   D O M A I N   D E C O M P O S E R
+
+ ...Number of harmonic indices:  4
+ ...Decompose to 2 harmonic index domains (with 1 processes per domain)
+
+
+ GENERATE CYCLIC SYMMETRY CONSTRAINT EQUATIONS
+
+ *** WARNING ***                         CP =       0.578   TIME= 00:30:02
+ There is no high edge node in a position to match low edge node 2545
+ (location error = 4.55E-04, maximum for all nodes).  Cyclic symmetry
+ constraint equations will be generated between the sector edges using
+ a mapping procedure similar to the CEINTF command.  This may reduce
+ solution accuracy, especially near the sector edges.
+
+ NUMBER OF CONSTRAINT EQUATIONS GENERATED=   363
+   (USING THE UNMATCHED NODES ALGORITHM)
+
+ *****  MAPDL SOLVE    COMMAND  *****
+
+ *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
+                ---GIVE SUGGESTIONS ONLY---
+
+ ELEMENT TYPE         1 IS SOLID186. KEYOPT(2) IS ALREADY SET AS SUGGESTED.
+
+
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   00:30:02  JAN 24, 2024 CP=      0.578
+
+
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .3-D
+   CYCLIC SYMMETRY SECTOR ANGLE. . . . . . . . . .   51.429     DEGREES
+   DEGREES OF FREEDOM. . . . . . UX   UY   UZ
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .MODAL
+      EXTRACTION METHOD. . . . . . . . . . . . . .BLOCK LANCZOS
+   NUMBER OF MODES TO EXTRACT. . . . . . . . . . .    10
+   USE CYCLIC MODES IN SUBSEQUENT MSUP ANALYSIS. .YES
+   SHIFT POINT . . . . . . . . . . . . . . . . . .  1.0000
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC
+   NUMBER OF MODES TO EXPAND . . . . . . . . . . .    10
+   ELEMENT RESULTS CALCULATION . . . . . . . . . .OFF
+
+ *** NOTE ***                            CP =       0.578   TIME= 00:30:02
+ The conditions for direct assembly have been met.  No .emat or .erot
+ files will be produced.
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   CYCLIC SYMMETRY HARMONIC INDEX. . . . . . . . .     0
+   THERMAL STRAINS INCLUDED IN THE LOAD VECTOR . .   YES
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS. . . . . . . . . . . .ALL DATA WRITTEN
+
+
+ *** WARNING ***                         CP =       0.641   TIME= 00:30:02
+ There is no high edge node in a position to match low edge node 2545
+ (location error = 4.55E-04, maximum for all nodes).  Cyclic symmetry
+ constraint equations will be generated between the sector edges using
+ a mapping procedure similar to the CEINTF command.  This may reduce
+ solution accuracy, especially near the sector edges.
+
+
+
+            **** CENTER OF MASS, MASS, AND MASS MOMENTS OF INERTIA ****
+
+  CALCULATIONS ASSUME ELEMENT MASS AT ELEMENT CENTROID
+
+  TOTAL MASS =  0.19205E-01
+
+                           MOM. OF INERTIA         MOM. OF INERTIA
+  CENTER OF MASS            ABOUT ORIGIN        ABOUT CENTER OF MASS
+
+  XC =  0.25304E-01      IXX =   0.3686E-05      IXX =   0.7910E-06
+  YC =  0.12186E-01      IYY =   0.1533E-04      IYY =   0.2994E-05
+  ZC =  0.15000E-02      IZZ =   0.1891E-04      IZZ =   0.3759E-05
+                         IXY =  -0.7303E-05      IXY =  -0.1381E-05
+                         IYZ =  -0.3510E-06      IYZ =   0.1412E-19
+                         IZX =  -0.7289E-06      IZX =   0.2565E-19
+
+
+  *** MASS SUMMARY BY ELEMENT TYPE ***
+
+  TYPE      MASS
+     1  0.192050E-01
+
+ Range of element maximum matrix coefficients in global coordinates
+ Maximum = 267009240 at element 2656.
+ Minimum = 160766982 at element 2628.
+
+   *** ELEMENT MATRIX FORMULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1      2658  SOLID186      0.234   0.000088
+ Time at end of element matrix formulation CP = 0.90625.
+
+  BLOCK LANCZOS CALCULATION OF UP TO    10 EIGENVECTORS.
+  NUMBER OF EQUATIONS              =        21460
+  MAXIMUM WAVEFRONT                =          218
+  MAXIMUM MODES STORED             =           10
+  MINIMUM EIGENVALUE               =  0.10000E+01
+  MAXIMUM EIGENVALUE               =  0.10000E+31
+
+  Memory allocated for solver              =   116.527 MB
+  Memory required for in-core solution     =   111.058 MB
+  Memory required for out-of-core solution =    36.935 MB
+
+ *** NOTE ***                            CP =       1.297   TIME= 00:30:02
+ The Sparse Matrix Solver used by the Block Lanczos eigensolver is
+ currently running in the in-core memory mode.  This memory mode uses
+ the most amount of memory in order to avoid using the hard drive as
+ much as possible, which most often results in the fastest solution
+ time.  This mode is recommended if enough physical memory is present
+ to accommodate all of the solver data.
+
+  Total memory available for LANCZOS         =     25.134869 GB
+
+  Process memory required for in-core LANCZOS Workspace             =     83.001320 MB
+  Process memory required for out-of-core LANCZOS Workspace         =     2.447731 MB
+  Lanczos Memory Mode : INCORE
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   00:30:03  JAN 24, 2024 CP=      1.672
+
+
+
+
+
+ *** FREQUENCIES FROM BLOCK LANCZOS ITERATION ***
+
+  MODE    FREQUENCY (HERTZ)
+
+
+   FREQUENCY RANGE REQUESTED=   10 MODES ABOVE   1.00000     HERTZ
+
+    1     1754.771705754
+    2     9255.308162400
+    3     10975.85412159
+    4     11515.65935183
+    5     21840.29313932
+    6     26924.90084957
+    7     33190.68613001
+    8     34449.50279427
+    9     38316.64328069
+   10     56181.28668418
+
+
+  ***** PARTICIPATION FACTOR AND MODAL MASS CALCULATION *****   HARMONIC INDEX=    0
+
+ GLOBAL                GLOBAL      PARTICIPATION
+  MODE   FREQUENCY    DIRECTION       FACTOR      EFFECTIVE MASS   MODAL MASS
+     1   1754.77         UZ         0.10238E-09     0.10482E-19      7.0000
+                       ROTZ         0.65166E-12     0.42466E-24
+     2   9255.31         UZ         0.24699E-09     0.61003E-19      7.0000
+                       ROTZ        -0.49917E-10     0.24917E-20
+     3   10975.9         UZ         0.10754E-07     0.11565E-15      7.0000
+                       ROTZ        -0.91366E-10     0.83478E-20
+     4   11515.7         UZ         0.51935E-08     0.26973E-16      7.0000
+                       ROTZ        -0.80792E-10     0.65273E-20
+     5   21840.3         UZ         0.21701E-08     0.47094E-17      7.0000
+                       ROTZ        -0.21049E-12     0.44305E-25
+     6   26924.9         UZ         0.24862E-08     0.61811E-17      7.0000
+                       ROTZ        -0.12438E-10     0.15471E-21
+     7   33190.7         UZ        -0.59235E-08     0.35087E-16      7.0000
+                       ROTZ         0.51218E-10     0.26233E-20
+     8   34449.5         UZ        -0.97315E-09     0.94703E-18      7.0000
+                       ROTZ         0.13593E-10     0.18477E-21
+     9   38316.6         UZ         0.15981E-08     0.25540E-17      7.0000
+                       ROTZ        -0.19885E-10     0.39540E-21
+    10   56181.3         UZ        -0.18112E-09     0.32805E-19      7.0000
+                       ROTZ         0.31673E-11     0.10031E-22
+
+
+ *** MAPDL BINARY FILE STATISTICS
+  BUFFER SIZE USED= 16384
+       32.688 MB WRITTEN ON ASSEMBLED MATRIX FILE: file0.full
+        2.062 MB WRITTEN ON MODAL MATRIX FILE: file0.mode
+        1.125 MB WRITTEN ON RESULTS FILE: file0.rst
+
+ GENERATE CYCLIC SYMMETRY CONSTRAINT EQUATIONS
+
+ NUMBER OF CONSTRAINT EQUATIONS GENERATED=   740
+   (USING THE UNMATCHED NODES ALGORITHM)
+
+ GENERATE CYCLIC SYMMETRY CONSTRAINT EQUATIONS
+
+ NUMBER OF CONSTRAINT EQUATIONS GENERATED=   726
+   (USING THE UNMATCHED NODES ALGORITHM)
+
+ *****  MAPDL SOLVE    COMMAND  *****
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   00:30:03  JAN 24, 2024 CP=      1.703
+
+
+
+
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     3
+   CYCLIC SYMMETRY HARMONIC INDEX. . . . . . . . .     2
+   THERMAL STRAINS INCLUDED IN THE LOAD VECTOR . .   YES
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS. . . . . . . . . . . .ALL DATA WRITTEN
+
+
+  BLOCK LANCZOS CALCULATION OF UP TO    10 EIGENVECTORS.
+  NUMBER OF EQUATIONS              =        42906
+  MAXIMUM WAVEFRONT                =          300
+  MAXIMUM MODES STORED             =           10
+  MINIMUM EIGENVALUE               =  0.10000E+01
+  MAXIMUM EIGENVALUE               =  0.10000E+31
+
+  Memory allocated for solver              =   247.438 MB
+  Memory required for in-core solution     =   235.819 MB
+  Memory required for out-of-core solution =    72.819 MB
+
+ *** NOTE ***                            CP =       2.562   TIME= 00:30:04
+ The Sparse Matrix Solver used by the Block Lanczos eigensolver is
+ currently running in the in-core memory mode.  This memory mode uses
+ the most amount of memory in order to avoid using the hard drive as
+ much as possible, which most often results in the fastest solution
+ time.  This mode is recommended if enough physical memory is present
+ to accommodate all of the solver data.
+
+  Total memory available for LANCZOS         =     24.742760 GB
+
+  Process memory required for in-core LANCZOS Workspace             =     165.465797 MB
+  Process memory required for out-of-core LANCZOS Workspace         =     4.411171 MB
+  Lanczos Memory Mode : INCORE
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   00:30:05  JAN 24, 2024 CP=      3.484
+
+
+
+
+
+ *** FREQUENCIES FROM BLOCK LANCZOS ITERATION ***
+
+  MODE    FREQUENCY (HERTZ)
+
+
+   FREQUENCY RANGE REQUESTED=   10 MODES ABOVE   1.00000     HERTZ
+
+    1     1057.619328531
+    2     1057.619328538
+    3     3380.530621120
+    4     3380.530621121
+    5     6319.874142942
+    6     6319.874142942
+    7     10091.65459692
+    8     10091.65459692
+    9     18041.41473794
+   10     18041.41473794
+
+
+   ***** MODAL MASS CALCULATION *****   HARMONIC INDEX=    2
+
+  MODE   FREQUENCY       MODAL MASS
+    11   1057.62           3.5000
+    12   1057.62           3.5000
+    13   3380.53           3.5000
+    14   3380.53           3.5000
+    15   6319.87           3.5000
+    16   6319.87           3.5000
+    17   10091.7           3.5000
+    18   10091.7           3.5000
+    19   18041.4           3.5000
+    20   18041.4           3.5000
+
+ GENERATE CYCLIC SYMMETRY CONSTRAINT EQUATIONS
+
+ NUMBER OF CONSTRAINT EQUATIONS GENERATED=   726
+   (USING THE UNMATCHED NODES ALGORITHM)
+</pre></div>
+</div>
+</section>
+<section id="get-the-results-of-the-cyclic-modal-analysis">
+<h2>Get the Results of the Cyclic Modal Analysis<a class="headerlink" href="#get-the-results-of-the-cyclic-modal-analysis" title="Link to this heading">#</a></h2>
+<p>将模态分析中的谐波可视化。</p>
+<p>更多详情，请参阅 <a class="reference external" href="https://www.mdpi.com/2076-3417/11/12/5437/pdf">Validation of a Modal Work Approach for Forced Response Analysis of Bladed Disks</a> 或 <a class="reference external" href="https://ansyshelp.ansys.com/Views/Secured/corp/v222/en/pdf/Ansys_Mechanical_APDL_Cyclic_Symmetry_Analysis_Guide.pdf">Cyclic Symmetry Analysis Guide</a> 。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>它使用传统的结果读取器(mapdl reader)，该读取器将在某个时候弃用，转而使用 DPF，但我们现在可以用它来制作一些精彩的动画。</p>
+</div>
+<p>有关循环结果后处理的更多详情，请参阅：
+* <a class="reference external" href="https://reader.docs.pyansys.com/version/stable/examples/01-cyclic_results/academic_sector_nd.html">Understanding Nodal Diameters from a Cyclic Model Analysis</a>
+* <a class="reference external" href="https://dpf.docs.pyansys.com/version/stable/examples/11-cyclic-symmetry/index.html">Cyclic symmetry examples</a></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 从 MAPDL 中抓取结果对象</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PyMAPDL Result
+Units       : User Defined
+Version     : 23.1
+Cyclic      : True
+Result Sets : 40
+Nodes       : 7279
+Elements    : 1329
+
+
+Available Results:
+NSL : Nodal displacements
+</pre></div>
+</div>
+</section>
+<section id="list-the-table-of-harmonic-indices">
+<h2>List the Table of Harmonic Indices<a class="headerlink" href="#list-the-table-of-harmonic-indices" title="Link to this heading">#</a></h2>
+<p>这是谐波指数表。该表为每个累积模态提供了相应的谐波指数。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C. Index   Harmonic Index&quot;</span><span class="p">)</span>
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">hindex</span></a></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">n_results</span><span class="p">),</span> <span class="n">result</span><span class="o">.</span><span class="n">harmonic_indices</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a></a><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">      </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">hindex</span></a></a><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>C. Index   Harmonic Index
+  0        0
+  1        0
+  2        0
+  3        0
+  4        0
+  5        0
+  6        0
+  7        0
+  8        0
+  9        0
+ 10        1
+ 11       -1
+ 12        1
+ 13       -1
+ 14        1
+ 15       -1
+ 16       -1
+ 17        1
+ 18       -1
+ 19        1
+ 20       -2
+ 21        2
+ 22       -2
+ 23        2
+ 24       -2
+ 25        2
+ 26       -2
+ 27        2
+ 28        2
+ 29       -2
+ 30       -3
+ 31        3
+ 32       -3
+ 33        3
+ 34       -3
+ 35        3
+ 36        3
+ 37       -3
+ 38        3
+ 39       -3
+</pre></div>
+</div>
+</section>
+<section id="generate-an-animation-of-a-traveling-wave">
+<h2>Generate an Animation of a Traveling Wave<a class="headerlink" href="#generate-an-animation-of-a-traveling-wave" title="Link to this heading">#</a></h2>
+<p>这是循环分析中第一个弯曲的节点直径 1。</p>
+<p>在节点直径为 1 的情况下，我们可以用以下方法得到第一阶摩天（通常是叶片转子的第一种弯曲模式）：</p>
+<p><code class="docutils literal notranslate"><span class="pre">mode_num</span> <span class="pre">=</span> <span class="pre">np.nonzero(result.harmonic_indices</span> <span class="pre">==</span> <span class="pre">1)[0][0]</span></code></p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">pv</span><span class="o">.</span><span class="n">global_theme</span><span class="o">.</span><span class="n">background</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span>
+
+<a href="https://docs.pyvista.org/version/stable/api/plotting/_autosummary/pyvista.CameraPosition.html#pyvista.CameraPosition" title="pyvista.CameraPosition" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.pyvista.org/version/stable/api/plotting/_autosummary/pyvista.CameraPosition.html#pyvista.CameraPosition" title="pyvista.CameraPosition" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_</span></a></a> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">animate_nodal_displacement</span><span class="p">(</span>
+    <span class="mi">11</span><span class="p">,</span>
+    <span class="n">displacement_factor</span><span class="o">=</span><span class="mf">5e-4</span><span class="p">,</span>
+    <span class="n">movie_filename</span><span class="o">=</span><span class="s2">&quot;traveling_wave11.gif&quot;</span><span class="p">,</span>
+    <span class="n">n_frames</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">loop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">add_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">show_scalar_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_cyclic_analysis_005.png" srcset="../../../_images/sphx_glr_cyclic_analysis_005.png" alt="cyclic analysis" class = "sphx-glr-single-img"/><p>这是节点直径 3 的一阶扭转模态。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.pyvista.org/version/stable/api/plotting/_autosummary/pyvista.CameraPosition.html#pyvista.CameraPosition" title="pyvista.CameraPosition" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.pyvista.org/version/stable/api/plotting/_autosummary/pyvista.CameraPosition.html#pyvista.CameraPosition" title="pyvista.CameraPosition" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_</span></a></a> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">animate_nodal_displacement</span><span class="p">(</span>
+    <span class="mi">36</span><span class="p">,</span>
+    <span class="n">displacement_factor</span><span class="o">=</span><span class="mf">2e-4</span><span class="p">,</span>
+    <span class="n">movie_filename</span><span class="o">=</span><span class="s2">&quot;traveling_wave36.gif&quot;</span><span class="p">,</span>
+    <span class="n">n_frames</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">loop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">add_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">show_scalar_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_cyclic_analysis_006.png" srcset="../../../_images/sphx_glr_cyclic_analysis_006.png" alt="cyclic analysis" class = "sphx-glr-single-img"/></section>
+<section id="parametric-geometry">
+<h2>Parametric Geometry<a class="headerlink" href="#parametric-geometry" title="Link to this heading">#</a></h2>
+<p>由于我们的几何体创建是脚本化的，因此可以创建任意数量的 “扇形” 结构。让我们用 20 个扇形创建一个更有趣的结构。</p>
+<p>首先，确保清除 MAPDL，以便我们从头开始。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+
+<span class="c1"># 生成 20 个扇形模型中的一个扇形</span>
+<span class="n">gen_sector</span><span class="p">(</span><span class="n">mapdl</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># make it cyclic</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cyclic</span><span class="p">()</span>
+
+<span class="c1"># Mesh it</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">esize</span></a></a> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">186</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">esize</span></a></a><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">esize</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">vsweep</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+
+<span class="c1"># apply materials</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;EX&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">210e9</span><span class="p">)</span>  <span class="c1"># Elastic moduli in Pa (kg/(m*s**2))</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;DENS&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7800</span><span class="p">)</span>  <span class="c1"># Density in kg/m3</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;NUXY&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>  <span class="c1"># Poisson&#39;s Ratio</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">emodif</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;MAT&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Run the modal analysis</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">modal_analysis</span><span class="p">(</span><span class="n">nmode</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">freqb</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># 从 MAPDL 中抓取结果对象</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">result</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PyMAPDL Result
+Units       : User Defined
+Version     : 23.1
+Cyclic      : True
+Result Sets : 66
+Nodes       : 3496
+Elements    : 579
+
+
+Available Results:
+NSL : Nodal displacements
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h2>List the Table of Harmonic Indices<a class="headerlink" href="#id2" title="Link to this heading">#</a></h2>
+<p>请注意，这些模式的谐波指数最高可达 10，即 N/2，其中 N 是扇形数。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C. Index   Harmonic Index&quot;</span><span class="p">)</span>
+<span class="k">for</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">hindex</span></a></a> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">n_results</span><span class="p">),</span> <span class="n">result</span><span class="o">.</span><span class="n">harmonic_indices</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">i</span></a></a><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">    </span><span class="si">{</span><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><a href="https://numpy.org/doc/stable/reference/arrays.scalars.html#numpy.int32" title="numpy.int32" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-attribute"><span class="n">hindex</span></a></a><span class="si">:</span><span class="s2">3d</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>C. Index   Harmonic Index
+  0      0
+  1      0
+  2      0
+  3      0
+  4      0
+  5      0
+  6      1
+  7     -1
+  8     -1
+  9      1
+ 10      1
+ 11     -1
+ 12     -2
+ 13      2
+ 14     -2
+ 15      2
+ 16      2
+ 17     -2
+ 18     -3
+ 19      3
+ 20     -3
+ 21      3
+ 22      3
+ 23     -3
+ 24      4
+ 25     -4
+ 26     -4
+ 27      4
+ 28      4
+ 29     -4
+ 30     -5
+ 31      5
+ 32     -5
+ 33      5
+ 34      5
+ 35     -5
+ 36      6
+ 37     -6
+ 38     -6
+ 39      6
+ 40      6
+ 41     -6
+ 42      7
+ 43     -7
+ 44     -7
+ 45      7
+ 46      7
+ 47     -7
+ 48      8
+ 49     -8
+ 50     -8
+ 51      8
+ 52     -8
+ 53      8
+ 54      9
+ 55     -9
+ 56     -9
+ 57      9
+ 58     -9
+ 59      9
+ 60     10
+ 61     10
+ 62     10
+ 63     10
+ 64     10
+ 65     10
+</pre></div>
+</div>
+</section>
+<section id="plot-first-bend-for-nodal-diameter-2">
+<h2>Plot First Bend for Nodal Diameter 2<a class="headerlink" href="#plot-first-bend-for-nodal-diameter-2" title="Link to this heading">#</a></h2>
+<p>请注意，由于该模态形状的节点直径为 2，因此可以清楚地看到两条节点线。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <span class="mi">12</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span> <span class="n">show_scalar_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">add_text</span><span class="o">=</span><span class="kc">False</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_cyclic_analysis_007.png" srcset="../../../_images/sphx_glr_cyclic_analysis_007.png" alt="cyclic analysis" class = "sphx-glr-single-img"/></section>
+<section id="animate-first-bend-for-nodal-diameter-2">
+<h2>Animate First Bend for Nodal Diameter 2<a class="headerlink" href="#animate-first-bend-for-nodal-diameter-2" title="Link to this heading">#</a></h2>
+<p>最后，让我们以模态 12 的动画效果结束本示例，它对应于本示例模型第二个节点直径的一阶弯曲。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.pyvista.org/version/stable/api/plotting/_autosummary/pyvista.CameraPosition.html#pyvista.CameraPosition" title="pyvista.CameraPosition" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.pyvista.org/version/stable/api/plotting/_autosummary/pyvista.CameraPosition.html#pyvista.CameraPosition" title="pyvista.CameraPosition" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">_</span></a></a> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">animate_nodal_displacement</span><span class="p">(</span>
+    <span class="mi">12</span><span class="p">,</span>
+    <span class="n">displacement_factor</span><span class="o">=</span><span class="mf">2e-4</span><span class="p">,</span>
+    <span class="n">movie_filename</span><span class="o">=</span><span class="s2">&quot;traveling_wave12.gif&quot;</span><span class="p">,</span>
+    <span class="n">n_frames</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+    <span class="n">off_screen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">loop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">add_text</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">show_scalar_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;jet&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_cyclic_analysis_008.png" srcset="../../../_images/sphx_glr_cyclic_analysis_008.png" alt="cyclic analysis" class = "sphx-glr-single-img"/><p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 16.871 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-00-mapdl-examples-cyclic-analysis-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/c1006e3495309d0f4ba99bfd2255865c/cyclic_analysis.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">cyclic_analysis.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/c35961b264b74402adb8421df2796884/cyclic_analysis.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">cyclic_analysis.py</span></code></a></p>
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-cyclic-sector">Create the Cyclic Sector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#make-the-model-cyclic">Make the Model Cyclic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-mesh">Generate the mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-material-properties">Apply Material Properties</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-the-modal-analysis">Run the Modal Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-results-of-the-cyclic-modal-analysis">Get the Results of the Cyclic Modal Analysis</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-the-table-of-harmonic-indices">List the Table of Harmonic Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-an-animation-of-a-traveling-wave">Generate an Animation of a Traveling Wave</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parametric-geometry">Parametric Geometry</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">List the Table of Harmonic Indices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-first-bend-for-nodal-diameter-2">Plot First Bend for Nodal Diameter 2</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#animate-first-bend-for-nodal-diameter-2">Animate First Bend for Nodal Diameter 2</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/examples/gallery_examples/00-mapdl-examples/cyclic_analysis.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

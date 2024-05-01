@@ -1,0 +1,1573 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>角钢支架的静态分析 &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/thebelab-helper.js"></script>
+    <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../../../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'examples/gallery_examples/00-mapdl-examples/bracket_static';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟" href="composite_dcb.html" />
+    <link rel="prev" title="使用 PyMAPDL 的 DPF-Core 基本用法" href="basic_dpf_example.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../../../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../../../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../../../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../../api_ff/index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item current active">
+                      <a class="nav-link dropdown-item nav-internal" href="../../index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../devportal.html">PyMAPDL Developer Portal articles</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/verif-manual/index.html">Verification Manual</a></li>
+<li class="toctree-l1"><a class="reference external" href="https://examples.mapdl.docs.pyansys.com/technology_showcase_examples/index.html">Technology Showcases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../extended_examples/index.html">Extended examples</a></li>
+</ul>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Full examples using PyMAPDL</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="2d_magnetostatic_solenoid-BodyFlux_Averaging.html">2D 静磁螺线管分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_plate_with_a_hole.html">MAPDL 2D 平面应力集中分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="2d_pressure_vessel.html">2D 压力容器分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3d_notch.html">缺口板的 3D 应力集中分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="3d_plate_thermal.html">pyMAPDL 基本热力学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="acoustic_analysis.html">3D 声学分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="basic_dpf_example.html">使用 PyMAPDL 的 DPF-Core 基本用法</a></li>
+
+
+
+
+
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">角钢支架的静态分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="composite_dcb.html">基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟</a></li>
+<li class="toctree-l2"><a class="reference internal" href="contact_elements.html">接触单元示例</a></li>
+
+<li class="toctree-l2"><a class="reference internal" href="cyclic_analysis.html">循环对称分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cyclic_static.html">静态循环分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="exhaust_manifold_thermal_stress.html">排气歧管的热结构分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="geometry.html">绘图和网格访问</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lathe_cutter.html">车床刀具结构分析</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapdl_3d_beam.html">MAPDL 3D Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="mapdl_beam.html">MAPDL 2D Beam</a></li>
+<li class="toctree-l2"><a class="reference internal" href="modal_beam.html">MAPDL 梁模态分析示例</a></li>
+<li class="toctree-l2"><a class="reference internal" href="path_operations.html">PyMAPDL 和 MAPDL 中的路径插值操作</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pressure_vessel.html">压力容器</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyvista_mesh.html">PyVista 网格集成</a></li>
+<li class="toctree-l2"><a class="reference internal" href="slashmap_cfx_mapping.html">将 CFX 压力数据映射到结构叶片</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spotweld.html">Running an input file - spotweld SHELL181 example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="torsional_load.html">Torsional load on a bar using SURF154 elements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transient_thermal.html">瞬态热力学分析</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01-geometry/index.html">Geometry examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02-tips-n-tricks/index.html">Miscellaneous examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03-general-fea/index.html">Academic finite element examples</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../../index.html" class="nav-link">Examples</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Full examples using PyMAPDL</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">角钢支架的静态分析</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-examples-gallery-examples-00-mapdl-examples-bracket-static-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code</p>
+</div>
+<section class="sphx-glr-example-title" id="ref-static-analysis-bracket">
+<span id="sphx-glr-examples-gallery-examples-00-mapdl-examples-bracket-static-py"></span><span id="id1"></span><h1>角钢支架的静态分析<a class="headerlink" href="#ref-static-analysis-bracket" title="Link to this heading">#</a></h1>
+<p>本例改编自 Ansys APDL 经典教程 <a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_tut/structural_cb.html">Static Analysis of a Corner Bracket（角钢支架的静态分析）</a> 。</p>
+<section id="problem-specification">
+<h2>Problem specification<a class="headerlink" href="#problem-specification" title="Link to this heading">#</a></h2>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>Applicable Products:</p></td>
+<td><p>Ansys Multiphysics, Ansys Mechanical, Ansys Structural</p></td>
+</tr>
+<tr class="row-even"><td><p>Level of Difficulty:</p></td>
+<td><p>Easy</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interactive Time Required:</p></td>
+<td><p>60 to 90 minutes</p></td>
+</tr>
+<tr class="row-even"><td><p>Discipline:</p></td>
+<td><p>Structural</p></td>
+</tr>
+<tr class="row-odd"><td><p>Analysis Type:</p></td>
+<td><p>Linear static</p></td>
+</tr>
+<tr class="row-even"><td><p>Element Types Used:</p></td>
+<td><p><a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_elem/Hlp_E_PLANE183.html..|pyansyscontact|replace::`PyAnsysCoreteam&lt;pyansys.core&#64;ansys.com&gt;`_">PLANE183</a></p></td>
+</tr>
+<tr class="row-odd"><td><p>Features Demonstrated:</p></td>
+<td><p>Solid modeling including primitives, boolean operations, and fillets; tapered pressure load
+deformed shape and stress displays; listing of reaction forces;</p></td>
+</tr>
+<tr class="row-even"><td><p>Help Resources:</p></td>
+<td><p>Structural Static Analysis and <a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_elem/Hlp_E_PLANE183.html..|pyansyscontact|replace::`PyAnsysCoreteam&lt;pyansys.core&#64;ansys.com&gt;`_">PLANE183</a></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="problem-description">
+<h2>Problem description<a class="headerlink" href="#problem-description" title="Link to this heading">#</a></h2>
+<p>这是一个简单的、单荷载步的角钢支架结构静力分析。左上方的销孔在其整个圆周上受到约束（焊接），
+右下方的销孔底部受到锥形压力载荷。使用美国习惯单位制。目的是演示 MAPDL 在分析中的典型应用。</p>
+<section id="bracket-model">
+<h3>Bracket model<a class="headerlink" href="#bracket-model" title="Link to this heading">#</a></h3>
+<p>角支架的尺寸如下图所示。支架由 A36 钢制成，其杨氏模量为 <span class="math notranslate nohighlight">\(3\cdot10^7\)</span> psi ，泊松比为 <span class="math notranslate nohighlight">\(0.27\)</span> 。</p>
+<figure class="align-default" id="id5">
+<a class="reference internal image-reference" href="../../../_images/bracket_dimensions.png"><img alt="Bracket image" src="../../../_images/bracket_dimensions.png" style="width: 400px;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>支架型号尺寸</strong></span><a class="headerlink" href="#id5" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="approach-and-assumptions">
+<h3>Approach and assumptions<a class="headerlink" href="#approach-and-assumptions" title="Link to this heading">#</a></h3>
+<p>由于支架在 Z 方向的厚度（1/2 英寸）比其 X 和 Y 方向的尺寸薄，而且压力载荷只作用在 X-Y 平面上，因此在分析时应假设为平面应力问题。</p>
+<p>这种方法是使用实体建模生成二维模型，并自动用节点和单元对其进行网格划分。
+另一种方法是直接创建节点和单元。</p>
+</section>
+</section>
+<section id="launching-mapdl">
+<h2>Launching MAPDL<a class="headerlink" href="#launching-mapdl" title="Link to this heading">#</a></h2>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ansys.mapdl.core</span> <span class="kn">import</span> <span class="n">launch_mapdl</span>
+
+<a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">jobName</span></a></a> <span class="o">=</span> <span class="s2">&quot;bracket&quot;</span>  <span class="c1"># optional</span>
+<span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">jobname</span><span class="o">=</span><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#str" title="builtins.str" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">jobName</span></a></a><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="build-the-geometry">
+<h2>Build the geometry<a class="headerlink" href="#build-the-geometry" title="Link to this heading">#</a></h2>
+<section id="define-rectangles">
+<h3>Define rectangles<a class="headerlink" href="#define-rectangles" title="Link to this heading">#</a></h3>
+<p>在 Mechanical APDL 中创建模型几何体有几种方法，有些方法比其他方法更方便。第一步是认识到可以使用矩形和圆形组合轻松构建支架。</p>
+<p>选择一个任意的全局原点位置，然后根据该原点定义矩形和圆形。在本分析中，使用左上方孔的中心点。首先定义一个相对于该位置的矩形。</p>
+<p>APDL 命令 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.rectng.html#ansys.mapdl.core.Mapdl.rectng" title="ansys.mapdl.core.Mapdl.rectng"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.rectng()</span></code></a> 用于创建一个具有 <code class="docutils literal notranslate"><span class="pre">X1</span></code>, <code class="docutils literal notranslate"><span class="pre">X2</span></code> , <code class="docutils literal notranslate"><span class="pre">Y1</span></code> 和 <code class="docutils literal notranslate"><span class="pre">Y2</span></code> 尺寸的矩形。
+在 PyMAPDL 中，<code class="xref py py-class docutils literal notranslate"><span class="pre">mapdl()</span></code> 类用于调用 APDL 命令。</p>
+<section id="dimension-box-1">
+<h4>Dimension box 1<a class="headerlink" href="#dimension-box-1" title="Link to this heading">#</a></h4>
+<p>输入以下内容：</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">X1</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">Y1</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="n">Y2</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>或者使用 Python 列表来存储几何尺寸：</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="dimension-box-2">
+<h4>Dimension box 2<a class="headerlink" href="#dimension-box-2" title="Link to this heading">#</a></h4>
+<p>输入以下内容：</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><a class="reference internal" href="../../../mapdl_commands/session/_autosummary/ansys.mapdl.core.Mapdl.prep7.html#ansys.mapdl.core.Mapdl.prep7" title="ansys.mapdl.core.Mapdl.prep7"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.prep7()</span></code></a> 命令启动 APDL 前处理器，开始建立分析。
+这是创建模型几何体的处理器。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">prep7</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>*** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   16:56:57  JAN 23, 2024 CP=      0.078
+
+
+
+
+
+          ***** MAPDL ANALYSIS DEFINITION (PREP7) *****
+</pre></div>
+</div>
+<p>利用 Python 的 <code class="xref py py-class docutils literal notranslate"><span class="pre">list</span></code> 或 <code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code> 类等 Python 特性，可以尽可能多地参数化。
+好的做法是将所有参数放在输入文件的顶部或附近。不过，在本互动教程中，这些参数都是内联的。（“内联”（inline） 这个词，是什么意思？ ————ff）</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 构建您的立方体</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">rectng</span><span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+<p>在 Python 中，可以在函数调用中使用 <code class="docutils literal notranslate"><span class="pre">*</span></code> 来解包对象。例如</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">rectng</span><span class="p">(</span><span class="o">*</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">)</span>  <span class="c1"># 打印所创建 area 的 ID，ID = 2</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</section>
+</section>
+<section id="plot-areas">
+<h3>Plot areas<a class="headerlink" href="#plot-areas" title="Link to this heading">#</a></h3>
+<p>PyMAPDL 绘图可以通过传递给不同绘图方法的参数来控制，例如 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.aplot.html#ansys.mapdl.core.Mapdl.aplot" title="ansys.mapdl.core.Mapdl.aplot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.aplot()</span></code></a> 。</p>
+<p>area 图中的两个矩形颜色相同。
+要更清楚地区分 area ，可以打开 area 编号（ <code class="docutils literal notranslate"><span class="pre">show_area_numbering=True</span></code> )或者显示 area 颜色（ <code class="docutils literal notranslate"><span class="pre">color_area=True</span></code> )。
+有关详细信息，请参阅 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.aplot.html#ansys.mapdl.core.Mapdl.aplot" title="ansys.mapdl.core.Mapdl.aplot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.aplot()</span></code></a> 方法。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_area_numbering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">color_areas</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<ul class="sphx-glr-horizontal">
+<li><img src="../../../_images/sphx_glr_bracket_static_001.png" srcset="../../../_images/sphx_glr_bracket_static_001.png" alt="bracket static" class = "sphx-glr-multi-img"/></li>
+<li><img src="../../../_images/sphx_glr_bracket_static_002.png" srcset="../../../_images/sphx_glr_bracket_static_002.png" alt="bracket static" class = "sphx-glr-multi-img"/></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>如果下载了 <a class="reference internal" href="#ref-static-analysis-bracket-end">本例</a> 的 Jupyter Notebook 版本，就可以利用 Jupyter Notebook 的功能。例如，你可以右键单击命令来显示上下文帮助。</p>
+</div>
+</section>
+<section id="create-first-circle">
+<h3>Create first circle<a class="headerlink" href="#create-first-circle" title="Link to this heading">#</a></h3>
+<p>利用逻辑和布尔几何运算，您可以使用原始几何参数（ <code class="docutils literal notranslate"><span class="pre">box1</span></code> , <code class="docutils literal notranslate"><span class="pre">box2</span></code> ）来定位圆。</p>
+<p>在支架两端各创建一个半圆。首先在两端各创建一个全圆，然后使用布尔添加操作（在 <a class="reference internal" href="#subtract-pin-holes-from-bracket">Subtract pin holes from bracket</a> 中讨论）将圆和矩形组合起来。</p>
+<p>创建圆的 APDL 命令是 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.cyl4.html#ansys.mapdl.core.Mapdl.cyl4" title="ansys.mapdl.core.Mapdl.cyl4"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.cyl4()</span></code></a> 。</p>
+<p>第一个圆形区域位于左侧 X、Y 位置，半径为 <span class="math notranslate nohighlight">\(1\)</span> 。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建第一个圆</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">radius</span></a></a> <span class="o">=</span> <span class="mi">1</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle1_X</span></a></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle1_Y</span></a></a> <span class="o">=</span> <span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle1_X</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle1_Y</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">radius</span></a></a><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_003.png" srcset="../../../_images/sphx_glr_bracket_static_003.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+<section id="create-second-circle">
+<h3>Create second circle<a class="headerlink" href="#create-second-circle" title="Link to this heading">#</a></h3>
+<p>在 X、Y 位置创建第二个圆：</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle2_X</span></a></a> <span class="o">=</span> <span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle2_Y</span></a></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>使用这些参数值创建新 area ，其半径与第一个圆形相同，即 <span class="math notranslate nohighlight">\(1\)</span>。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle2_X</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">circle2_Y</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">radius</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_004.png" srcset="../../../_images/sphx_glr_bracket_static_004.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+<section id="add-areas">
+<h3>Add areas<a class="headerlink" href="#add-areas" title="Link to this heading">#</a></h3>
+<p>现在已经定义了模型的相应部分（矩形和圆形），将它们添加到一起，使模型成为一个连续的区域。
+使用布尔加操作 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.aadd.html#ansys.mapdl.core.Mapdl.aadd" title="ansys.mapdl.core.Mapdl.aadd"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.aadd()</span></code></a> 将 area 合并到一起。</p>
+<p>使用 <code class="docutils literal notranslate"><span class="pre">all</span></code> 参数添加所有 area。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">aadd</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>  <span class="c1"># 该命令会 return 布尔运算后形成 area 的 ID</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</section>
+<section id="create-line-fillet">
+<h3>Create line fillet<a class="headerlink" href="#create-line-fillet" title="Link to this heading">#</a></h3>
+<p>使用半径为 <span class="math notranslate nohighlight">\(0.4\)</span> 的圆角可以改善两个方框之间的直角。
+您可以选择该区域周围的线条，然后创建圆角。</p>
+<p>使用 APDL <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.lsel.html#ansys.mapdl.core.Mapdl.lsel" title="ansys.mapdl.core.Mapdl.lsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lsel()</span></code></a> 方法选择线条。在这里，线条的 X 和 Y 位置用于创建方框，以创建选区。</p>
+<p>选择线条后，需要将其写入一个参数，以便生成圆角线。
+这是使用 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.get.html#ansys.mapdl.core.Mapdl.get" title="ansys.mapdl.core.Mapdl.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.get()</span></code></a> 方法完成的。</p>
+<p>由于只选择了一条线，因此可以使用 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.get.html#ansys.mapdl.core.Mapdl.get" title="ansys.mapdl.core.Mapdl.get"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.get()</span></code></a> 方法的 <code class="docutils literal notranslate"><span class="pre">MAX</span></code> 和 <code class="docutils literal notranslate"><span class="pre">NUM</span></code> 参数。</p>
+<p>选择第一条线进行圆角处理</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">line1</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">l1</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line1&quot;</span><span class="p">,</span> <span class="s2">&quot;LINE&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;NUM&quot;</span><span class="p">,</span> <span class="s2">&quot;MAX&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>如果将命令写入 Python 参数 (<code class="docutils literal notranslate"><span class="pre">line1</span></code>)，则创建圆角线时可以使用 APDL 参数 <code class="docutils literal notranslate"><span class="pre">l1`</span> <span class="pre">或</span> <span class="pre">Python</span> <span class="pre">参数</span> <span class="pre">``line1</span></code> 。</p>
+<p>为圆角选择第二条线并创建 Python 参数</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">line2</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">l2</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;line2&quot;</span><span class="p">,</span> <span class="s2">&quot;LINE&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;NUM&quot;</span><span class="p">,</span> <span class="s2">&quot;MAX&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>选中两条线后，可以使用 PyMAPDL 命令 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.lfillt.html#ansys.mapdl.core.Mapdl.lfillt" title="ansys.mapdl.core.Mapdl.lfillt"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lfillt()</span></code></a> 在两条线之间生成圆角。</p>
+<p><strong>注意*</strong>，如果选择了多条线，Python 可以返回一个列表。</p>
+<p>在这里，您可以混合使用 APDL 参数字符串 <code class="docutils literal notranslate"><span class="pre">line1</span></code> 和 Python 参数 <code class="docutils literal notranslate"><span class="pre">l2</span></code> 来创建圆角线。</p>
+<p>使用所选线条创建圆角线（参数名称）</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fillet_radius</span></a></a> <span class="o">=</span> <span class="mf">0.4</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">line3</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">lfillt</span><span class="p">(</span><span class="s2">&quot;line1&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">l2</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fillet_radius</span></a></a><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_005.png" srcset="../../../_images/sphx_glr_bracket_static_005.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+<section id="create-fillet-area">
+<h3>Create fillet area<a class="headerlink" href="#create-fillet-area" title="Link to this heading">#</a></h3>
+<p>使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.al.html#ansys.mapdl.core.Mapdl.al" title="ansys.mapdl.core.Mapdl.al"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.al()</span></code></a> 方法创建由 <code class="docutils literal notranslate"><span class="pre">line1</span></code> 、 <code class="docutils literal notranslate"><span class="pre">line2</span></code> 和新创建的 <code class="docutils literal notranslate"><span class="pre">line3</span></code> 框定的 area。
+这三条线就是输入。如果全部选中，可以使用 <code class="docutils literal notranslate"><span class="pre">'ALL'</span></code> 参数创建 area。</p>
+<p>首先，您必须在圆角区域重新选择新创建的线条。为此，您可以使用 <code class="docutils literal notranslate"><span class="pre">fillet_radius</span></code> 参数和 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.lsel.html#ansys.mapdl.core.Mapdl.lsel" title="ansys.mapdl.core.Mapdl.lsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lsel()</span></code></a> 命令。</p>
+<p>对于新创建的两条直线，长度与 <code class="docutils literal notranslate"><span class="pre">fillet_radius</span></code> 值相同。因此，可以在 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.lsel.html#ansys.mapdl.core.Mapdl.lsel" title="ansys.mapdl.core.Mapdl.lsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lsel()</span></code></a> 命令中使用长度参数。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+
+<span class="c1"># Select lines for the area</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LENGTH&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">fillet_radius</span></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>array([4, 5])
+</pre></div>
+</div>
+<p>此外，您还需要获取圆角线本身（<code class="docutils literal notranslate"><span class="pre">line3</span></code>）。您可以再次使用 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.lsel.html#ansys.mapdl.core.Mapdl.lsel" title="ansys.mapdl.core.Mapdl.lsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lsel()</span></code></a> 命令，
+如果模型中只有一条具有该半径的线，可以使用 <code class="docutils literal notranslate"><span class="pre">'RADIUS'</span></code> 参数，或者更直接地使用该线的参数名。
+注意 <code class="docutils literal notranslate"><span class="pre">'A'</span></code> 以额外选择项目。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;LINE&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">line3</span></a></a><span class="p">)</span>
+
+<span class="c1"># plotting ares</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_line_numbering</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_006.png" srcset="../../../_images/sphx_glr_bracket_static_006.png" alt="bracket static" class = "sphx-glr-single-img"/><p>然后使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.al.html#ansys.mapdl.core.Mapdl.al" title="ansys.mapdl.core.Mapdl.al"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.al()</span></code></a> 命令从线条中创建 area。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the area</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">al</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">)</span>  <span class="c1"># 打印新创建区域的 ID</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</section>
+<section id="add-areas-together">
+<h3>Add areas together<a class="headerlink" href="#add-areas-together" title="Link to this heading">#</a></h3>
+<p>使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.aadd.html#ansys.mapdl.core.Mapdl.aadd" title="ansys.mapdl.core.Mapdl.aadd"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.aadd()</span></code></a> 命令再次追加所有区域。
+因为只有两个区域需要合并，所以使用 <code class="docutils literal notranslate"><span class="pre">'ALL'</span></code> 参数。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Add the area to the main area</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aadd</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span> <span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_007.png" srcset="../../../_images/sphx_glr_bracket_static_007.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+<section id="create-first-pin-hole">
+<h3>Create first pin hole<a class="headerlink" href="#create-first-pin-hole" title="Link to this heading">#</a></h3>
+<p>第一个销孔位于第一个矩形的左侧。因此，您可以利用矩形的尺寸来确定圆的位置。</p>
+<p>销孔的 X 值（中心）位于 <code class="docutils literal notranslate"><span class="pre">box1</span></code> 的第一个坐标处（<code class="docutils literal notranslate"><span class="pre">X1</span></code>）。Y 值是两个 <code class="docutils literal notranslate"><span class="pre">box1</span></code> Y 值的平均值：</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 创建第一个销孔</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a> <span class="o">=</span> <span class="mf">0.4</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1_X</span></a></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1_Y</span></a></a> <span class="o">=</span> <span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box1</span></a></a><span class="p">[</span><span class="mi">3</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1_X</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1_Y</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<p>因为有两个销孔圆，所以可以使用该命令两次。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>其中一些区域被设置为参数，以便在以后的分析中使用。这样，您就可以使用 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.asll.html#ansys.mapdl.core.Mapdl.asll" title="ansys.mapdl.core.Mapdl.asll"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.asll()</span></code></a> 命令创建这些区域。</p>
+</div>
+</section>
+<section id="create-second-pin-hole">
+<h3>Create second pin hole<a class="headerlink" href="#create-second-pin-hole" title="Link to this heading">#</a></h3>
+<p>第二个销孔位于第二个长方体的底部，因此我们可以再次使用长方体 2 的尺寸来定位圆。
+该销孔的尺寸为：</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_X</span></a></a> <span class="o">=</span> <span class="p">(</span><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_Y</span></a></a> <span class="o">=</span> <a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/stdtypes.html#list" title="builtins.list" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">box2</span></a></a><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">cyl4</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_X</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_Y</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a><span class="p">)</span>
+<span class="n">pinhole2_lines</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">asll</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="subtract-pin-holes-from-bracket">
+<h3>Subtract pin holes from bracket<a class="headerlink" href="#subtract-pin-holes-from-bracket" title="Link to this heading">#</a></h3>
+<p>如果使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.aplot()</span></code> 命令与线一起使用，此时将创建两个重叠的圆形区域。
+可以使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.asba()</span></code> 命令（用于减去 area 的布尔命令）从长方形中删除圆。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 从支架上减去销孔 area</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">asba</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1</span></a></a><span class="p">)</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bracket</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">asba</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">aplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">show_lines</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_008.png" srcset="../../../_images/sphx_glr_bracket_static_008.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+</section>
+<section id="model-definition">
+<h2>Model definition<a class="headerlink" href="#model-definition" title="Link to this heading">#</a></h2>
+<section id="define-material-properties">
+<h3>Define material properties<a class="headerlink" href="#define-material-properties" title="Link to this heading">#</a></h3>
+<p>支架只需定义一种材料属性，即 A36 钢，并给出杨氏弹性模量和泊松比值。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ex</span></a></a> <span class="o">=</span> <span class="mf">30e6</span>  <span class="c1"># Young&#39;s Modulus</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">prxy</span></a></a> <span class="o">=</span> <span class="mf">0.27</span>  <span class="c1"># Poisson&#39;s ratio</span>
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.mp.html#ansys.mapdl.core.Mapdl.mp" title="ansys.mapdl.core.Mapdl.mp"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.mp()</span></code></a> 命令在 PyMAPDL 中定义材料属性。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;EX&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">ex</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">mp</span><span class="p">(</span><span class="s2">&quot;PRXY&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">prxy</span></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>MATERIAL          1     PRXY =  0.2700000
+</pre></div>
+</div>
+</section>
+<section id="define-element-types-and-options">
+<h3>Define element types and options<a class="headerlink" href="#define-element-types-and-options" title="Link to this heading">#</a></h3>
+<p>您可以使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.et.html#ansys.mapdl.core.Mapdl.et" title="ansys.mapdl.core.Mapdl.et"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.et()</span></code></a> 命令来选择单元。</p>
+<p>在任何分析中，您都要从单元类型库中选择单元，并为分析定义合适的单元。在本例中，只使用了一种单元类型：<a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_elem/Hlp_E_PLANE183.html..|pyansyscontact|replace::`PyAnsysCoreteam&lt;pyansys.core&#64;ansys.com&gt;`_">PLANE183</a> ，一种二维、二次方、结构、高阶单元。</p>
+<p>使用高阶单元可以获得比低阶单元更粗糙的网格，同时还能保持求解精度。此外，Mechanical APDL 还能在网格中生成一些三角形单元，否则在使用低阶单元时就会出现不准确的情况。</p>
+<section id="options-for-plane183">
+<h4>Options for <cite>PLANE183</cite><a class="headerlink" href="#options-for-plane183" title="Link to this heading">#</a></h4>
+<p>指定带有厚度的平面应力作为 <a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_elem/Hlp_E_PLANE183.html..|pyansyscontact|replace::`PyAnsysCoreteam&lt;pyansys.core&#64;ansys.com&gt;`_">PLANE183</a> 的选项。(厚度在 <a class="reference internal" href="#define-real-constants">Define real constants</a> 中定义为实常数）。
+为单元行为选择带有厚度选项的平面应力。厚度选项通过单元 keyoption(3) 设置。更多信息，请参阅 Ansys 帮助中的 <a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_elem/Hlp_E_PLANE183.html..|pyansyscontact|replace::`PyAnsysCoreteam&lt;pyansys.core&#64;ansys.com&gt;`_">PLANE183</a> 单元定义。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 定义具有厚度的 ``PLANE183`` 单元类型</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">et</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;PLANE183&quot;</span><span class="p">,</span> <span class="n">kop3</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span> <span class="c1"># return 一个 int 类型的值</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</section>
+</section>
+<section id="define-real-constants">
+<h3>Define real constants<a class="headerlink" href="#define-real-constants" title="Link to this heading">#</a></h3>
+<p>假设平面应力与厚度有关，请在 <a class="reference external" href="https://ansyshelp.ansys.com/account/Secured?returnurl=/Views/Secured/corp/v231/en/ans_elem/Hlp_E_PLANE183.html..|pyansyscontact|replace::`PyAnsysCoreteam&lt;pyansys.core&#64;ansys.com&gt;`_">PLANE183</a> 中输入厚度作为实常数：</p>
+<p>您可以使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.r.html#ansys.mapdl.core.Mapdl.r" title="ansys.mapdl.core.Mapdl.r"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.r()</span></code></a> 命令来设置实常数。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置单元厚度</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">thick</span></a></a> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">r</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">thick</span></a></a><span class="p">)</span>  <span class="c1"># 厚度为 0.5 长度单位</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>REAL CONSTANT SET          1  ITEMS   1 TO   6
+   0.50000       0.0000       0.0000       0.0000       0.0000       0.0000
+</pre></div>
+</div>
+</section>
+</section>
+<section id="mesh">
+<h2>Mesh<a class="headerlink" href="#mesh" title="Link to this heading">#</a></h2>
+<p>您可以在不指定网格大小控制的情况下对模型进行网格划分。如果您不确定如何确定网格密度，可以让 Mechanical APDL 应用默认网格。
+但对于此模型，您需要指定一个全局单元尺寸来控制整体网格密度。
+使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.esize.html#ansys.mapdl.core.Mapdl.esize" title="ansys.mapdl.core.Mapdl.esize"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.esize()</span></code></a> 命令设置全局大小控制。设置大小为 <span class="math notranslate nohighlight">\(0.5\)</span> 或稍小的值以改善网格质量。</p>
+<p>使用 <a class="reference internal" href="../../../mapdl_commands/prep7/_autosummary/ansys.mapdl.core.Mapdl.amesh.html#ansys.mapdl.core.Mapdl.amesh" title="ansys.mapdl.core.Mapdl.amesh"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.amesh()</span></code></a> 命令将这些区域网格化。您的网格可能与显示的网格略有不同。在后处理过程中，您可能会看到略有不同的结果。</p>
+<p>现在可以使用 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.eplot.html#ansys.mapdl.core.Mapdl.eplot" title="ansys.mapdl.core.Mapdl.eplot"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.eplot()</span></code></a> 命令查看网格。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">element_size</span></a></a> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">esize</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">element_size</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">amesh</span><span class="p">(</span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bracket</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">eplot</span><span class="p">(</span>
+    <span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span>
+    <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_axes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">line_width</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="n">background</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_009.png" srcset="../../../_images/sphx_glr_bracket_static_009.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+<section id="boundary-conditions">
+<h2>Boundary conditions<a class="headerlink" href="#boundary-conditions" title="Link to this heading">#</a></h2>
+<p>加载是 <a class="reference internal" href="../../../mapdl_commands/post26/_autosummary/ansys.mapdl.core.Mapdl.solu.html#ansys.mapdl.core.Mapdl.solu" title="ansys.mapdl.core.Mapdl.solu"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.solu()</span></code></a> 命令或 APDL 中求解器的一部分。
+但也可以使用 <a class="reference internal" href="../../../mapdl_commands/session/_autosummary/ansys.mapdl.core.Mapdl.prep7.html#ansys.mapdl.core.Mapdl.prep7" title="ansys.mapdl.core.Mapdl.prep7"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.prep7()</span></code></a> 命令在前处理器中完成。</p>
+<p>可以通过调用 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.solution.Solution.html#ansys.mapdl.core.solution.Solution" title="ansys.mapdl.core.solution.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">mapdl.solution()</span></code></a> 类、使用 <a class="reference internal" href="../../../mapdl_commands/session/_autosummary/ansys.mapdl.core.Mapdl.slashsolu.html#ansys.mapdl.core.Mapdl.slashsolu" title="ansys.mapdl.core.Mapdl.slashsolu"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.slashsolu()</span></code></a> 命令
+或使用 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.run.html#ansys.mapdl.core.Mapdl.run" title="ansys.mapdl.core.Mapdl.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.run(&quot;/solu&quot;)</span></code></a> 调用 APDL <code class="docutils literal notranslate"><span class="pre">/SOLU</span></code> 命令来激活求解器。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">solution</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>***** ROUTINE COMPLETED *****  CP =         3.578
+
+
+
+ *****  MAPDL SOLUTION ROUTINE  *****
+</pre></div>
+</div>
+<p>使用 <a class="reference internal" href="../../../mapdl_commands/solution/_autosummary/ansys.mapdl.core.Mapdl.antype.html#ansys.mapdl.core.Mapdl.antype" title="ansys.mapdl.core.Mapdl.antype"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.antype()</span></code></a> 命令设置分析类型。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">antype</span><span class="p">(</span><span class="s2">&quot;STATIC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>PERFORM A STATIC ANALYSIS
+  THIS WILL BE A NEW ANALYSIS
+</pre></div>
+</div>
+<section id="apply-displacement-constraints">
+<h3>Apply displacement constraints<a class="headerlink" href="#apply-displacement-constraints" title="Link to this heading">#</a></h3>
+<p>这是为模型添加边界条件的地方。首先，您需要在第一个销孔处设置 displacement = 0 来固定模型。您可以直接在线条上应用位移约束。</p>
+<p>如果不使用图形界面，则需要重新绘制线条。或者使用布尔运算，根据销孔位置/方框参数生成线条。
+使用创建的参数，可以选择线条并固定一端。</p>
+<p>使用 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.lsel.html#ansys.mapdl.core.Mapdl.lsel" title="ansys.mapdl.core.Mapdl.lsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lsel()</span></code></a> 命令和 <cite>pinehole1</cite> 参数选取左侧销孔周围的四条线。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bc1</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span>
+    <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1_X</span></a></a> <span class="o">-</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole1_X</span></a></a> <span class="o">+</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Number of lines selected : </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">bc1</span></a></a><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>Number of lines selected : 4
+</pre></div>
+</div>
+<p>然后在加载时，使用 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.nsll.html#ansys.mapdl.core.Mapdl.nsll" title="ansys.mapdl.core.Mapdl.nsll"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.nsll()</span></code></a> 命令选择并将边界条件应用于连接到这些线条的节点。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fixNodes</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">nsll</span><span class="p">(</span><span class="n">type_</span><span class="o">=</span><span class="s2">&quot;S&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>接下来使用 <a class="reference internal" href="../../../mapdl_commands/solution/_autosummary/ansys.mapdl.core.Mapdl.d.html#ansys.mapdl.core.Mapdl.d" title="ansys.mapdl.core.Mapdl.d"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.d()</span></code></a> 命令将位移设为零（固定约束）。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 设置边界条件</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">d</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># ``0`` 不是必要的，因为默认值即是 0</span>
+
+<span class="c1"># 再次选择所有内容</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>SELECT ALL ENTITIES OF TYPE= ALL  AND BELOW
+</pre></div>
+</div>
+</section>
+<section id="apply-pressure-load">
+<h3>Apply pressure load<a class="headerlink" href="#apply-pressure-load" title="Link to this heading">#</a></h3>
+<p>在右下方的销孔上施加锥形压力载荷。在这里，锥形是指线性变化。
+在 MAPDL 中创建圆时，有四条线定义了圆的周长；因此，在构成圆下半部的两条线上施加压力。
+由于压力会从圆底部的最大值（500 psi）逐渐减小到两侧的最小值（50 psi），因此应分两步施加压力，每条线的减小值相反。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">p1</span></a></a> <span class="o">=</span> <span class="mi">50</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">p2</span></a></a> <span class="o">=</span> <span class="mi">500</span>
+</pre></div>
+</div>
+<p>MAPDL 对压力加载的约定是，正加载值代表对表面的压力（压缩）。</p>
+<p>要选取线条，请使用前一个代码单元格中使用的 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.lsel.html#ansys.mapdl.core.Mapdl.lsel" title="ansys.mapdl.core.Mapdl.lsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.lsel()</span></code></a> 命令，
+然后使用 <a class="reference internal" href="../../../mapdl_commands/database/_autosummary/ansys.mapdl.core.Mapdl.nsel.html#ansys.mapdl.core.Mapdl.nsel" title="ansys.mapdl.core.Mapdl.nsel"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.nsel()</span></code></a> 命令将线条转换为节点选择。</p>
+<p>请注意，我们对全圆的四分之二进行了略为复杂的挑选。选择线条的方法是选择第二个销孔圆的下半部分。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_Y</span></a></a> <span class="o">-</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_Y</span></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>array([11, 12])
+</pre></div>
+</div>
+<p>现在从该选区中重新选取小于销孔 X 中心的线条。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_X</span></a></a><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lplot</span><span class="p">(</span><span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_010.png" srcset="../../../_images/sphx_glr_bracket_static_010.png" alt="bracket static" class = "sphx-glr-single-img"/><p>找到正确的线条后，使用 <a class="reference internal" href="../../../mapdl_commands/solution/_autosummary/ansys.mapdl.core.Mapdl.sf.html#ansys.mapdl.core.Mapdl.sf" title="ansys.mapdl.core.Mapdl.sf"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.sf()</span></code></a> 命令加载具有不同表面载荷的线条。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 在这里，您应该加载第二个销孔下半部分的左侧。</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">p1</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">p2</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>SELECT ALL ENTITIES OF TYPE= ALL  AND BELOW
+</pre></div>
+</div>
+<p>对第二个销孔重复上述步骤。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_Y</span></a></a> <span class="o">-</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_Y</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lsel</span><span class="p">(</span><span class="s2">&quot;R&quot;</span><span class="p">,</span> <span class="s2">&quot;LOC&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_X</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole2_X</span></a></a> <span class="o">+</span> <a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">pinhole_radius</span></a></a><span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">lplot</span><span class="p">(</span>
+    <span class="n">vtk</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span>
+    <span class="n">show_line_numbering</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+
+<span class="n">mapdl</span><span class="o">.</span><span class="n">sf</span><span class="p">(</span><span class="s2">&quot;ALL&quot;</span><span class="p">,</span> <span class="s2">&quot;PRES&quot;</span><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">p2</span></a></a><span class="p">,</span> <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">p1</span></a></a><span class="p">)</span>
+<span class="n">mapdl</span><span class="o">.</span><span class="n">allsel</span><span class="p">()</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_011.png" srcset="../../../_images/sphx_glr_bracket_static_011.png" alt="bracket static" class = "sphx-glr-single-img"/><div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>SELECT ALL ENTITIES OF TYPE= ALL  AND BELOW
+</pre></div>
+</div>
+</section>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Link to this heading">#</a></h2>
+<p>要求解 Ansys FE 分析，必须使用 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.solution.Solution.html#ansys.mapdl.core.solution.Solution" title="ansys.mapdl.core.solution.Solution"><code class="xref py py-class docutils literal notranslate"><span class="pre">mapdl.solution()</span></code></a> 类
+或 <a class="reference internal" href="../../../mapdl_commands/session/_autosummary/ansys.mapdl.core.Mapdl.slashsolu.html#ansys.mapdl.core.Mapdl.slashsolu" title="ansys.mapdl.core.Mapdl.slashsolu"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.slashsolu()</span></code></a> 命令激活求解器。这已在前面几步中完成。</p>
+<p>可以使用 <a class="reference internal" href="../../../mapdl_commands/solution/_autosummary/ansys.mapdl.core.Mapdl.solve.html#ansys.mapdl.core.Mapdl.solve" title="ansys.mapdl.core.Mapdl.solve"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.solve()</span></code></a> 命令求解模型了。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 求解模型</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">solve</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>*** NOTE ***                            CP =       3.875   TIME= 16:57:02
+ The automatic domain decomposition logic has selected the MESH domain
+ decomposition method with 2 processes per solution.
+
+ *****  MAPDL SOLVE    COMMAND  *****
+
+ *** NOTE ***                            CP =       3.875   TIME= 16:57:02
+ There is no title defined for this analysis.
+
+ *** SELECTION OF ELEMENT TECHNOLOGIES FOR APPLICABLE ELEMENTS ***
+                ---GIVE SUGGESTIONS ONLY---
+
+ ELEMENT TYPE         1 IS PLANE183 WITH PLANE STRESS OPTION. NO SUGGESTION IS
+ AVAILABLE.
+
+
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   16:57:02  JAN 23, 2024 CP=      3.875
+
+
+
+
+
+                       S O L U T I O N   O P T I O N S
+
+   PROBLEM DIMENSIONALITY. . . . . . . . . . . . .2-D
+   DEGREES OF FREEDOM. . . . . . UX   UY
+   ANALYSIS TYPE . . . . . . . . . . . . . . . . .STATIC (STEADY-STATE)
+   GLOBALLY ASSEMBLED MATRIX . . . . . . . . . . .SYMMETRIC
+
+ *** NOTE ***                            CP =       3.875   TIME= 16:57:02
+ Present time 0 is less than or equal to the previous time.  Time will
+ default to 1.
+
+ *** NOTE ***                            CP =       3.875   TIME= 16:57:02
+ The imaginary pressure value defined on element 2, face 2 (and possibly
+ others) will be not be used for this analysis type, but may be in a
+ later analysis.
+
+ *** NOTE ***                            CP =       3.875   TIME= 16:57:02
+ The conditions for direct assembly have been met.  No .emat or .erot
+ files will be produced.
+
+
+
+     D I S T R I B U T E D   D O M A I N   D E C O M P O S E R
+
+  ...Number of elements: 90
+  ...Number of nodes:    335
+  ...Decompose to 2 CPU domains
+  ...Element load balance ratio =     1.000
+
+
+                      L O A D   S T E P   O P T I O N S
+
+   LOAD STEP NUMBER. . . . . . . . . . . . . . . .     1
+   TIME AT END OF THE LOAD STEP. . . . . . . . . .  1.0000
+   NUMBER OF SUBSTEPS. . . . . . . . . . . . . . .     1
+   STEP CHANGE BOUNDARY CONDITIONS . . . . . . . .    NO
+   PRINT OUTPUT CONTROLS . . . . . . . . . . . . .NO PRINTOUT
+   DATABASE OUTPUT CONTROLS. . . . . . . . . . . .ALL DATA WRITTEN
+                                                  FOR THE LAST SUBSTEP
+
+
+ SOLUTION MONITORING INFO IS WRITTEN TO FILE= file.mntr
+
+
+ Range of element maximum matrix coefficients in global coordinates
+ Maximum = 96184869.3 at element 15.
+ Minimum = 31609902.3 at element 36.
+
+   *** ELEMENT MATRIX FORMULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1        90  PLANE183      0.000   0.000000
+ Time at end of element matrix formulation CP = 3.90625.
+
+ DISTRIBUTED SPARSE MATRIX DIRECT SOLVER.
+  Number of equations =         646,    Maximum wavefront =     44
+
+  Process memory allocated for solver              =     0.441 MB
+  Process memory required for in-core solution     =     0.425 MB
+  Process memory required for out-of-core solution =     0.425 MB
+
+  Total memory allocated for solver                =     0.873 MB
+  Total memory required for in-core solution       =     0.841 MB
+  Total memory required for out-of-core solution   =     0.841 MB
+
+ *** NOTE ***                            CP =       3.906   TIME= 16:57:02
+ The Distributed Sparse Matrix Solver is currently running in the
+ in-core memory mode.  This memory mode uses the most amount of memory
+ in order to avoid using the hard drive as much as possible, which most
+ often results in the fastest solution time.  This mode is recommended
+ if enough physical memory is present to accommodate all of the solver
+ data.
+ Distributed sparse solver maximum pivot= 81097755.9 at node 145 UX.
+ Distributed sparse solver minimum pivot= 236722.519 at node 313 UY.
+ Distributed sparse solver minimum pivot in absolute value= 236722.519
+ at node 313 UY.
+
+   *** ELEMENT RESULT CALCULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1        90  PLANE183      0.000   0.000000
+
+   *** NODAL LOAD CALCULATION TIMES
+     TYPE    NUMBER   ENAME      TOTAL CP  AVE CP
+
+        1        90  PLANE183      0.000   0.000000
+ *** LOAD STEP     1   SUBSTEP     1  COMPLETED.    CUM ITER =      1
+ *** TIME =   1.00000         TIME INC =   1.00000      NEW TRIANG MATRIX
+
+
+ *** MAPDL BINARY FILE STATISTICS
+  BUFFER SIZE USED= 16384
+        0.125 MB WRITTEN ON ASSEMBLED MATRIX FILE: file0.full
+        0.312 MB WRITTEN ON RESULTS FILE: file0.rst
+</pre></div>
+</div>
+<p>Mechanical APDL 在数据库和结果文件 <code class="file docutils literal notranslate"><span class="pre">Jobname.RST</span></code> 中存储此单载荷步问题的结果（或对于热问题存储 <code class="file docutils literal notranslate"><span class="pre">Jobname.RTH</span></code> 或对于磁问题存储 <code class="file docutils literal notranslate"><span class="pre">Jobname.RMG</span></code>）。
+数据库在任何给定时间只能包含一组结果，因此在多加载步或多子步分析中，Mechanical APDL 仅在数据库中存储最终解决方案。</p>
+<p>Mechanical APDL 将所有求解结果存储在结果文件中。</p>
+</section>
+<section id="review-the-results">
+<h2>Review the results<a class="headerlink" href="#review-the-results" title="Link to this heading">#</a></h2>
+<p>这一步代表后处理阶段的开始。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>由于网格的差异，您看到的结果可能与显示的结果略有不同。</p>
+</div>
+<section id="enter-the-postprocessor">
+<h3>Enter the postprocessor<a class="headerlink" href="#enter-the-postprocessor" title="Link to this heading">#</a></h3>
+<p>Ansys APDL 后处理器是使用 <a class="reference internal" href="../../../mapdl_commands/session/_autosummary/ansys.mapdl.core.Mapdl.post1.html#ansys.mapdl.core.Mapdl.post1" title="ansys.mapdl.core.Mapdl.post1"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.post1()</span></code></a> 命令调用的独立处理器。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">post1</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>FINISH SOLUTION PROCESSING
+
+
+ ***** ROUTINE COMPLETED *****  CP =         3.938
+
+
+
+ *** MAPDL - ENGINEERING ANALYSIS SYSTEM  RELEASE 2023 R1          23.1     ***
+ Ansys Mechanical Enterprise
+ 20120530  VERSION=WINDOWS x64   16:57:02  JAN 23, 2024 CP=      3.938
+
+
+
+
+
+          ***** MAPDL RESULTS INTERPRETATION (POST1) *****
+
+ *** NOTE ***                            CP =       3.938   TIME= 16:57:02
+ Reading results into the database (SET command) will update the current
+ displacement and force boundary conditions in the database with the
+ values from the results file for that load set.  Note that any
+ subsequent solutions will use these values unless action is taken to
+ either SAVE the current values or not overwrite them (/EXIT,NOSAVE).
+</pre></div>
+</div>
+</section>
+<section id="plot-the-deformed-shape">
+<h3>Plot the deformed shape<a class="headerlink" href="#plot-the-deformed-shape" title="Link to this heading">#</a></h3>
+<p>此处 <a class="reference internal" href="../../../api/_autosummary/ansys.mapdl.core.Mapdl.result.html#ansys.mapdl.core.Mapdl.result" title="ansys.mapdl.core.Mapdl.result"><code class="xref py py-class docutils literal notranslate"><span class="pre">mapdl.result</span></code></a> 类用于检索结果和绘图。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 绘制位移结果</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">result</span>
+<a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result_set</span></a></a> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 绘制第一个荷载步结果</span>
+<a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#float" title="builtins.float" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">disp_fact</span></a></a> <span class="o">=</span> <span class="mf">1e10</span>
+<span class="n">result</span><span class="o">.</span><span class="n">plot_nodal_displacement</span><span class="p">(</span>
+    <a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.python.org/3/library/functions.html#int" title="builtins.int" class="sphx-glr-backref-module-builtins sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">result_set</span></a></a><span class="p">,</span>
+    <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span>
+    <span class="n">displacement_factor</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">show_displacement</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_012.png" srcset="../../../_images/sphx_glr_bracket_static_012.png" alt="bracket static" class = "sphx-glr-single-img"/></section>
+<section id="plot-the-von-mises-equivalent-stress">
+<h3>Plot the von Mises equivalent stress<a class="headerlink" href="#plot-the-von-mises-equivalent-stress" title="Link to this heading">#</a></h3>
+<p>您还可以使用 <code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.plot_principal_nodal_stress()</span></code> 命令生成应力图。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">plot_principal_nodal_stress</span><span class="p">(</span>
+    <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;SEQV&quot;</span><span class="p">,</span>
+    <span class="n">cpos</span><span class="o">=</span><span class="s2">&quot;xy&quot;</span><span class="p">,</span>
+    <span class="n">background</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">,</span>
+    <span class="n">text_color</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">,</span>
+    <span class="n">add_text</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">show_edges</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+<img src="../../../_images/sphx_glr_bracket_static_013.png" srcset="../../../_images/sphx_glr_bracket_static_013.png" alt="bracket static" class = "sphx-glr-single-img"/><p>获取 von Mises 应力。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://docs.pyvista.org/version/stable/api/utilities/_autosummary/pyvista.pyvista_ndarray.html#pyvista.pyvista_ndarray" title="pyvista.pyvista_ndarray" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://docs.pyvista.org/version/stable/api/utilities/_autosummary/pyvista.pyvista_ndarray.html#pyvista.pyvista_ndarray" title="pyvista.pyvista_ndarray" class="sphx-glr-backref-module-pyvista sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">nnum</span></a></a><span class="p">,</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">stress</span></a></a> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">principal_nodal_stress</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1"># 这里返回的是一个 tuple</span>
+
+<span class="c1"># Von Mises 应力是应力结果中的最后一列</span>
+<a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">von_mises</span></a></a> <span class="o">=</span> <a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html#numpy.ndarray" title="numpy.ndarray" class="sphx-glr-backref-module-numpy sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">stress</span></a></a><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="list-reaction-solution">
+<h3>List reaction solution<a class="headerlink" href="#list-reaction-solution" title="Link to this heading">#</a></h3>
+<p>要列出 FY 反应力，请使用 APDL <a class="reference internal" href="../../../mapdl_commands/post1/_autosummary/ansys.mapdl.core.Mapdl.prrsol.html#ansys.mapdl.core.Mapdl.prrsol" title="ansys.mapdl.core.Mapdl.prrsol"><code class="xref py py-meth docutils literal notranslate"><span class="pre">mapdl.prrsol()</span></code></a> 命令，该命令会打印受约束的节点反力。</p>
+<p>您可以使用 <a class="reference internal" href="../../../api/commands.html#ansys.mapdl.core.commands.CommandListingOutput" title="ansys.mapdl.core.commands.CommandListingOutput"><code class="xref py py-meth docutils literal notranslate"><span class="pre">to_dataframe</span></code></a> 命令将输出转换为 dataframe ，以便进行更静态的打印：</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">reactForces</span></a></a> <span class="o">=</span> <span class="n">mapdl</span><span class="o">.</span><span class="n">prrsol</span><span class="p">(</span><span class="n">lab</span><span class="o">=</span><span class="s2">&quot;FY&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_dataframe</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;NODE&quot;</span><span class="p">,</span> <span class="s2">&quot;FY&quot;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" title="pandas.core.frame.DataFrame" class="sphx-glr-backref-module-pandas-core-frame sphx-glr-backref-type-py-class sphx-glr-backref-instance"><span class="n">reactForces</span></a></a><span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>     NODE       FY
+0   103.0  21.7590
+1   104.0   9.8719
+2   105.0  12.5870
+3   107.0   1.5168
+4   108.0  12.2310
+5   109.0  29.4880
+6   111.0 -29.8790
+7   112.0 -10.5920
+8   113.0  -2.5094
+9   114.0 -12.4730
+10  115.0  -9.8004
+11  116.0 -22.2000
+</pre></div>
+</div>
+<p>显示的数值具有代表性，可能与您获得的数值不同。在一般后处理器中，还有许多其他选项可用于查看结果。
+您可以在其他教程中看到其中一些选项，如 <a class="reference external" href="https://ansyshelp.ansys.com/account/secured?returnurl=/Views/Secured/corp/v231/en/ans_tut/Hlp_UI_Tutorials.html">Ansys 教程指南</a> (这个好像需要 Ansys 账号才能看)。</p>
+</section>
+<section id="exit-mechanical-apdl">
+<h3>Exit Mechanical APDL<a class="headerlink" href="#exit-mechanical-apdl" title="Link to this heading">#</a></h3>
+<p>完成后退出 Mechanical APDL。</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">mapdl</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+</pre></div>
+</div>
+<p class="sphx-glr-timing" id="ref-static-analysis-bracket-end"><strong>Total running time of the script:</strong> (0 minutes 8.206 seconds)</p>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-examples-gallery-examples-00-mapdl-examples-bracket-static-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/63bb77d59abc28750714552437953834/bracket_static.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">bracket_static.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../../_downloads/fe6575b18502549b5be4888b0fabe508/bracket_static.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">bracket_static.py</span></code></a></p>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-specification">Problem specification</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problem-description">Problem description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bracket-model">Bracket model</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#approach-and-assumptions">Approach and assumptions</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#launching-mapdl">Launching MAPDL</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#build-the-geometry">Build the geometry</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-rectangles">Define rectangles</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimension-box-1">Dimension box 1</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dimension-box-2">Dimension box 2</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-areas">Plot areas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-first-circle">Create first circle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-second-circle">Create second circle</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-areas">Add areas</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-line-fillet">Create line fillet</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-fillet-area">Create fillet area</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-areas-together">Add areas together</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-first-pin-hole">Create first pin hole</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#create-second-pin-hole">Create second pin hole</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#subtract-pin-holes-from-bracket">Subtract pin holes from bracket</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#model-definition">Model definition</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-material-properties">Define material properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-element-types-and-options">Define element types and options</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#options-for-plane183">Options for <cite>PLANE183</cite></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-real-constants">Define real constants</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mesh">Mesh</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#boundary-conditions">Boundary conditions</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-displacement-constraints">Apply displacement constraints</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apply-pressure-load">Apply pressure load</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#solution">Solution</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#review-the-results">Review the results</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#enter-the-postprocessor">Enter the postprocessor</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-deformed-shape">Plot the deformed shape</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-von-mises-equivalent-stress">Plot the von Mises equivalent stress</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#list-reaction-solution">List reaction solution</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#exit-mechanical-apdl">Exit Mechanical APDL</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/examples/gallery_examples/00-mapdl-examples/bracket_static.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>

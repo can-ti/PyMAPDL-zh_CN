@@ -1,0 +1,117 @@
+
+
+.. _sphx_glr_examples_gallery_examples_02-tips-n-tricks:
+
+Miscellaneous examples
+======================
+这些示例演示了使用 PyMAPDL 的各种技巧。
+
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="该示例演示了如何添加新示例，同时也是创建示例时可使用的模板。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/02-tips-n-tricks/images/thumb/sphx_glr_00-example-template_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_02-tips-n-tricks_00-example-template.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">添加一个新的 Gallery Example</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例向您展示如何使用 PyMAPDL 控制网格密度。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/02-tips-n-tricks/images/thumb/sphx_glr_01-smoothing-element-size-transitions_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_02-tips-n-tricks_01-smoothing-element-size-transitions.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">MAPDL 单元尺寸转换示例</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例向您展示如何使用 PyMAPDL 中的内联函数（Inline Functions）。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/02-tips-n-tricks/images/thumb/sphx_glr_03-using_inline_functions_and_Query_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_02-tips-n-tricks_03-using_inline_functions_and_Query.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">使用内联函数（Query）</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="在本例中，我们将展示如何处理壳体和旋转位移。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/02-tips-n-tricks/images/thumb/sphx_glr_04-rotational-displacement_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_02-tips-n-tricks_04-rotational-displacement.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">生成和提取旋转位移</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本教程将演示如何探索 MAPDL 会话生成的二进制文件内容并提取相关记录。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/02-tips-n-tricks/images/thumb/sphx_glr_05-explore_mapdl_files_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_02-tips-n-tricks_05-explore_mapdl_files.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">二进制 MAPDL 文件资源管理器</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/02-tips-n-tricks/00-example-template
+   /examples/gallery_examples/02-tips-n-tricks/01-smoothing-element-size-transitions
+   /examples/gallery_examples/02-tips-n-tricks/03-using_inline_functions_and_Query
+   /examples/gallery_examples/02-tips-n-tricks/04-rotational-displacement
+   /examples/gallery_examples/02-tips-n-tricks/05-explore_mapdl_files
+

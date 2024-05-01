@@ -1,0 +1,112 @@
+# Compiled source #
+###################
+*.pyc
+*.pyd
+*.c
+*.cpp
+*.so
+*.o
+*.cache
+
+# OS generated files #
+######################
+.fuse_hidden*
+*~
+*swp
+
+# emacs
+flycheck*
+
+# Old files #
+_old/
+
+# Pip generated folders #
+#########################
+*.egg-info/
+
+
+# build/
+doc/build/
+dist/
+*.pickle
+
+
+# MISC
+_build/
+pyansys/Interface.py
+*.bat
+doc/source/examples/gallery_examples/*
+*.out
+*.tar.gz
+*.mypy_cache
+
+
+# docs
+_autosummary
+doc/build_errors.txt
+
+
+# Testing
+factory/
+Testing/
+UnitTesting/
+TODO
+test.sh
+.pytest_cache/
+tests/.coverage
+tests/htmlcov
+tests/cyclic/htmlcov
+.coverage
+*,cover
+.benchmarks/
+test-output.xml
+coverage.xml
+.tox/
+
+\#*
+.\#*
+/.ipynb_checkpoints
+
+# test scripts
+*.cmd
+wheelhouse/
+
+# jupyterlab
+node_modules
+yarn.lock
+jupyterlab/docker/*.tar.gz
+examples/.local
+.ipynb_checkpoints/
+
+# docker
+docker/mapdl/v211
+docker/mapdl/v212
+docker/mapdl/_old
+docker/mapdl/*.sh
+
+
+# temp testing
+tmp.out
+
+# virtual environment
+venv/
+.venv/
+.venv
+
+# Visual studio code local settings
+.vscode/
+
+# Pycharm local settings
+.idea/
+/.vs
+
+# Extra
+doc/source/errors.txt
+doc/source/sg_execution_times.rst
+*prin-stresses.html
+doc/webserver.log
+doc/webserver.pid
+
+# ff
+# workflows本想push之后,自动build文档,但无法安装ansys,所以放弃
+.github/

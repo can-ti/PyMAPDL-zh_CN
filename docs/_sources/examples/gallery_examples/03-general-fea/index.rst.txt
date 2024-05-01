@@ -1,0 +1,44 @@
+
+
+.. _sphx_glr_examples_gallery_examples_03-general-fea:
+
+Academic finite element examples
+================================
+这些示例演示了适用于 Python 和 MAPDL 的有限元方法，同时强调了一些 Python 库，如 `matplotlib <https://matplotlib.org/>`_ 。
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="使用等参数公式为四边形单元建立了有限元模型，并用 PyMAPDL 进行了验证。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/03-general-fea/images/thumb/sphx_glr_00-how_finite_element_works_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_03-general-fea_00-how_finite_element_works.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">建立有限元模型</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/03-general-fea/00-how_finite_element_works
+

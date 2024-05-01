@@ -1,0 +1,34 @@
+ignore:
+  - "src/ansys/mapdl/core/_commands"
+  - "src/ansys/mapdl/core/jupyter.py"
+  - "src/ansys/mapdl/core/mapdl_console.py"
+
+comment:
+  layout: "diff"
+  behavior: default
+  require_changes: true  # Avoid coverage comment if no files are changed.
+
+coverage:
+  range: 70..100
+  round: down
+  precision: 2
+  status:
+    project:
+      default:
+        target: 80%
+    patch:
+      default:
+        # basic
+        target: 90%
+        if_not_found: success
+        if_ci_failed: error
+        if_no_uploads: error
+        threshold: 4%  # Because some tests are flaky.
+
+codecov:
+  notify:
+    wait_for_ci: yes
+    # do not notify until at least 5 builds have been uploaded from the CI pipeline
+    after_n_builds: 3
+  comment:
+    after_n_builds: 3

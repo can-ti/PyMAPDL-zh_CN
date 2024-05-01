@@ -1,0 +1,476 @@
+
+
+.. _sphx_glr_examples_gallery_examples_00-mapdl-examples:
+
+Full examples using PyMAPDL
+===========================
+这些示例演示了使用 PyMAPDL 模块的完整示例。
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbnails">
+
+.. thumbnail-parent-div-open
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip=" 本示例展示了如何收集和绘制单元间材料不连续的结果（Power graphics style）与默认的全平均结果（Full graphics style）。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_2d_magnetostatic_solenoid-BodyFlux_Averaging_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_2d_magnetostatic_solenoid-BodyFlux_Averaging.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">2D 静磁螺线管分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本教程展示了如何使用 PyMAPDL 确定和验证 &quot;应力集中系数&quot; ，先使用二维平面单元建模，然后使用三维单元进行验证。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_2d_plate_with_a_hole_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_2d_plate_with_a_hole.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">MAPDL 2D 平面应力集中分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示如何创建一个基本压力容器并对其施加环向压力。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_2d_pressure_vessel_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_2d_pressure_vessel.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">2D 压力容器分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本教程是 2D 平面示例 ref_plane_stress_concentration 的 3D 推论。 不过，此示例验证了在有限宽度薄板上建立相对单缺口模型时的应力集中因子 K-t 。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_3d_notch_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_3d_notch.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">缺口板的 3D 应力集中分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何使用 MAPDL 在 pyMAPDL 中创建板块、施加热边界条件、求解并绘制曲线。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_3d_plate_thermal_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_3d_plate_thermal.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">pyMAPDL 基本热力学分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何使用 PyMAPDL 和 FLUID 单元进行声学分析。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_acoustic_analysis_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_acoustic_analysis.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">3D 声学分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例改编自 DPF-Core 基本用法示例 ， 展示了如何在 DPF 中打开结果文件，并进行一些基本的后处理。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_basic_dpf_example_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_basic_dpf_example.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">使用 PyMAPDL 的 DPF-Core 基本用法</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例改编自 Ansys APDL 经典教程 Static Analysis of a Corner Bracket（角钢支架的静态分析） 。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_bracket_static_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_bracket_static.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">角钢支架的静态分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="这是一个经典的双悬臂梁试验，常用于研究复合材料板的 I 型界面脱层。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_composite_dcb_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_composite_dcb.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">基于黏结单元(或称内聚单元)的双悬臂梁试验静力模拟</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示如何为一般接触问题创建接触单元。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_contact_elements_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_contact_elements.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">接触单元示例</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本示例使用循环扇形的参数几何创建了一个叶盘，然后对该循环扇形进行模态分析。 然后，我们使用传统的 MAPDL reader 对结果进行后处理，最后使用参数建模器生成另一个循环模型。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_cyclic_analysis_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_cyclic_analysis.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">循环对称分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="在 1000 RPM 转速下，使用英制单位系统对转子扇形示例进行静态循环分析。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_cyclic_static_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_cyclic_static.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">静态循环分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例说明如何映射 CFD 分析结果并执行有限元 (FE) 分析。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_exhaust_manifold_thermal_stress_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_exhaust_manifold_thermal_stress.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">排气歧管的热结构分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="PyMAPDL 可以加载基本的 IGES 几何图形进行分析。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_geometry_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_geometry.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">绘图和网格访问</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="介绍 PyMAPDL 的基本功能。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_lathe_cutter_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_lathe_cutter.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">车床刀具结构分析</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="这是一个简单的示例，加载包含梁的档案文件，然后使用简化的 modal_analysis 方法运行模态分析。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_mapdl_3d_beam_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_mapdl_3d_beam.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">MAPDL 3D Beam</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip=" 本例来自 Paletikrishna Chaitanya、Sambanarajesh Kumar 和 Datti Srinivas 合著的 &quot;Finite element analysis...">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_mapdl_beam_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_mapdl_beam.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">MAPDL 2D Beam</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示了如何执行简单的模态分析并将分析结果制作成动画。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_modal_beam_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_modal_beam.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">MAPDL 梁模态分析示例</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本教程展示了如何使用 pyansys 和 MAPDL 沿路径进行应力插值。它展示了 pyvista 模块执行插值的一些高级功能。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_path_operations_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_path_operations.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">PyMAPDL 和 MAPDL 中的路径插值操作</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本例演示如何创建一个基本压力容器并对其施加压力。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_pressure_vessel_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_pressure_vessel.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">压力容器</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="在 MAPDL 中对 pyvista 生成的网格进行模态分析。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_pyvista_mesh_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_pyvista_mesh.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">PyVista 网格集成</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="本测试的目的是在 PyMAPDL 中演示 CFX 压力数据与 11 个叶片结构模型的映射。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_slashmap_cfx_mapping_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_slashmap_cfx_mapping.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">将 CFX 压力数据映射到结构叶片</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This MAPDL example demonstrates how to model spot welding on three thin sheets of metal. Here, ...">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_spotweld_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_spotweld.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Running an input file - spotweld SHELL181 example</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="This Ansys PyMAPDL script builds a bar and applies torque to it using SURF154 elements. This is...">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_torsional_load_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_torsional_load.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">Torsional load on a bar using SURF154 elements</div>
+    </div>
+
+
+.. raw:: html
+
+    <div class="sphx-glr-thumbcontainer" tooltip="此示例演示如何了使用 PyMAPDL 输入随时间变化的温度表，以改变梁的温度。它使用对流系数和体积温度独立变化的对流载荷。">
+
+.. only:: html
+
+  .. image:: /examples/gallery_examples/00-mapdl-examples/images/thumb/sphx_glr_transient_thermal_thumb.png
+    :alt:
+
+  :ref:`sphx_glr_examples_gallery_examples_00-mapdl-examples_transient_thermal.py`
+
+.. raw:: html
+
+      <div class="sphx-glr-thumbnail-title">瞬态热力学分析</div>
+    </div>
+
+
+.. thumbnail-parent-div-close
+
+.. raw:: html
+
+    </div>
+
+
+.. toctree::
+   :hidden:
+
+   /examples/gallery_examples/00-mapdl-examples/2d_magnetostatic_solenoid-BodyFlux_Averaging
+   /examples/gallery_examples/00-mapdl-examples/2d_plate_with_a_hole
+   /examples/gallery_examples/00-mapdl-examples/2d_pressure_vessel
+   /examples/gallery_examples/00-mapdl-examples/3d_notch
+   /examples/gallery_examples/00-mapdl-examples/3d_plate_thermal
+   /examples/gallery_examples/00-mapdl-examples/acoustic_analysis
+   /examples/gallery_examples/00-mapdl-examples/basic_dpf_example
+   /examples/gallery_examples/00-mapdl-examples/bracket_static
+   /examples/gallery_examples/00-mapdl-examples/composite_dcb
+   /examples/gallery_examples/00-mapdl-examples/contact_elements
+   /examples/gallery_examples/00-mapdl-examples/cyclic_analysis
+   /examples/gallery_examples/00-mapdl-examples/cyclic_static
+   /examples/gallery_examples/00-mapdl-examples/exhaust_manifold_thermal_stress
+   /examples/gallery_examples/00-mapdl-examples/geometry
+   /examples/gallery_examples/00-mapdl-examples/lathe_cutter
+   /examples/gallery_examples/00-mapdl-examples/mapdl_3d_beam
+   /examples/gallery_examples/00-mapdl-examples/mapdl_beam
+   /examples/gallery_examples/00-mapdl-examples/modal_beam
+   /examples/gallery_examples/00-mapdl-examples/path_operations
+   /examples/gallery_examples/00-mapdl-examples/pressure_vessel
+   /examples/gallery_examples/00-mapdl-examples/pyvista_mesh
+   /examples/gallery_examples/00-mapdl-examples/slashmap_cfx_mapping
+   /examples/gallery_examples/00-mapdl-examples/spotweld
+   /examples/gallery_examples/00-mapdl-examples/torsional_load
+   /examples/gallery_examples/00-mapdl-examples/transient_thermal
+

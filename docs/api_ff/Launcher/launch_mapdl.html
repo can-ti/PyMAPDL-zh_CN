@@ -1,0 +1,958 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+    
+        
+    <title>launch_mapdl &#8212; PyMAPDL</title>
+    
+
+
+
+
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=5b4479735964841361fd" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=5b4479735964841361fd" rel="stylesheet" />
+
+  
+  <link href="../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=5b4479735964841361fd" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css?v=572af1d6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=61a4c737" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css\ansys_sphinx_theme.css?v=35e44410" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css?v=0a3b3ea7" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css?v=11ae5704" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd" />
+  <script src="../../_static/vendor/fontawesome/6.1.2/js/all.min.js?digest=5b4479735964841361fd"></script>
+ 
+<link href="../../_static/css/breadcrumbs.css" rel="stylesheet" />
+
+    <script src="../../_static/documentation_options.js?v=62044b56"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=49e1bf35"></script>
+    <script src="../../_static/js\table.js?v=b64f5182"></script>
+    <script src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@jupyter-widgets/html-manager@^1.0.1/dist/embed-amd.js"></script>
+    <script src="../../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-JQJKPV6ZVB"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-JQJKPV6ZVB');
+            </script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'api_ff/Launcher/launch_mapdl';</script>
+    <script>
+        DOCUMENTATION_OPTIONS.theme_version = '0.14.4';
+        DOCUMENTATION_OPTIONS.theme_switcher_json_url = 'https://mapdl.docs.pyansys.com/versions.json';
+        DOCUMENTATION_OPTIONS.theme_switcher_version_match = '0.68';
+        DOCUMENTATION_OPTIONS.show_version_warning_banner = false;
+        </script>
+    <link rel="icon" href="../../_static/ansys-favicon.png"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="close_all_local_instances" href="close_all_local_instances.html" />
+    <link rel="prev" title="get_default_ansys_version" href="get_default_ansys_version.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container"><!-- Debugging: html_theme_options =  -->
+ 
+<!-- Include the MeiliSearch CSS stylesheet only if theme present -->
+<link href="../../_static/css/meilisearch.css" rel="stylesheet" />
+
+<!-- Create a search bar form with a text input and a dropdown selector for the search index -->
+<form
+  class="bd-search d-flex align-items-center"
+  action="../../search.html"
+  method="get"
+>
+  <i class="fa fa-search" aria-hidden="true" id="search-icon"></i>
+  <input
+    type="search"
+    placeholder="Search"
+    class="form-control"
+    id="search-bar-input"
+    autofocus
+  />
+  <span class="search-button__kbd-shortcut"
+    ><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span
+  >
+  <style>
+    .bd-search .search-button__kbd-shortcut {
+      right: 33%;
+    }
+  </style>
+  
+  <select id="indexUidSelector" class="index-select">
+    
+    <option value="pymapdl-v0-68">PyMAPDL</option>
+    
+  </select>
+  
+  <!-- Include the MeiliSearch JavaScript library for the search bar -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js"></script>
+
+    
+  <script>
+    var HOST_URL = "https://backend.search.pyansys.com/";
+    var API_KEY = "";
+    var indexUid = "pymapdl-v0-68";
+  </script>
+
+  <script src="../../_static/js/meilisearch_theme_wrap.js"></script>
+</form>
+</div>
+  </div>
+   
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-light" alt="PyMAPDL - Home"/>
+    <script>document.write(`<img src="../../_static/pyansys-logo-black-cropped.png" class="logo__image only-dark" alt="PyMAPDL - Home"/>`);</script>
+  
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-2"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-2"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-2"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-2">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+        <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+    <div id="announcement_msg"></div>
+<script>
+  fetch("announcement.html")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+      return response.text();
+    })
+    .then(
+      (text) => (document.getElementById("announcement_msg").innerHTML = text),
+    )
+    .catch((error) => console.error(`Fetch problem: ${error.message}`));
+</script>  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../getting_started/index.html">
+                        Getting started
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../user_guide/index.html">
+                        User guide
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../mapdl_commands/index.html">
+                        MAPDL commands
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../api/index.html">
+                        API reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../index.html">
+                        ff_API
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../../examples/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <div class="version-switcher__container dropdown">
+    <button id="pst-version-switcher-button-3"
+      type="button"
+      class="version-switcher__button btn btn-sm navbar-btn dropdown-toggle"
+      data-bs-toggle="dropdown"
+      aria-haspopup="listbox"
+      aria-controls="pst-version-switcher-list-3"
+      aria-label="Version switcher list"
+    >
+      Choose version  <!-- this text may get changed later by javascript -->
+      <span class="caret"></span>
+    </button>
+    <div id="pst-version-switcher-list-3"
+      class="version-switcher__menu dropdown-menu list-group-flush py-0"
+      role="listbox" aria-labelledby="pst-version-switcher-button-3">
+      <!-- dropdown will be populated by javascript on page load -->
+    </div>
+  </div>
+`);
+</script></div>
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+          <div class="navbar-item"><ul class="navbar-icon-links navbar-nav"
+    aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa-brands fa-square-github fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">GitHub</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/ansys/pymapdl/discussions" title="Support" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-comment fa-fw fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Support</span></a>
+        </li>
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://mapdl.docs.pyansys.com/version/dev/getting_started/contribution.html" title="Contribute" class="nav-link" rel="noopener" target="_blank" data-bs-toggle="tooltip" data-bs-placement="bottom"><span><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></span>
+            <span class="sr-only">Contribute</span></a>
+        </li>
+</ul></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="index.html">Launcher</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="get_default_ansys.html">get_default_ansys</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_default_ansys_path.html">get_default_ansys_path</a></li>
+<li class="toctree-l2"><a class="reference internal" href="get_default_ansys_version.html">get_default_ansys_version</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">launch_mapdl</a></li>
+<li class="toctree-l2"><a class="reference internal" href="close_all_local_instances.html">close_all_local_instances</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Logging/index.html">Logging</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+         
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="https://docs.pyansys.com/" class="nav-link">PyAnsys</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a
+        href="../../index.html"
+        class="nav-link"
+        aria-label="Home"
+      >
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="../index.html" class="nav-link">ff_API</a>
+    </li>
+     
+    <li class="breadcrumb-item">
+      <a href="index.html" class="nav-link">Launcher</a>
+    </li>
+      
+    <li class="breadcrumb-item active" aria-current="page">launch_mapdl</li>
+    
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="launch-mapdl">
+<h1>launch_mapdl<a class="headerlink" href="#launch-mapdl" title="Link to this heading">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="ff_ansys.mapdl.core.launcher.launch_mapdl">
+<span class="sig-prename descclassname"><span class="pre">ff_ansys.mapdl.core.launcher.</span></span><span class="sig-name descname"><span class="pre">launch_mapdl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exec_file=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_location=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">jobname='file'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nproc=2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ram=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mode=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">override=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">loglevel='ERROR'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">additional_switches=''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_timeout=45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">port=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup_on_exit=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start_instance=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ip=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clear_on_connect=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_apdl=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_temp_files=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_temp_dir_on_exit=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose_mapdl=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_server_check=True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">license_type=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">pr:class:`int`_com=False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_env_vars=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">replace_env_vars=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version=None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">**kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#ff_ansys.mapdl.core.launcher.launch_mapdl" title="Link to this definition">#</a></dt>
+<dd><p>在本地启动 MAPDL。</p>
+<dl class="field-list">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt>exec_file<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>MAPDL 可执行文件的位置。当默认设置为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 且未设置环境变量时，将使用缓存位置。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>也可通过环境变量 <code class="docutils literal notranslate"><span class="pre">PYMAPDL_MAPDL_EXEC</span></code> 设置可执行路径。例如:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">export PYMAPDL_MAPDL_EXEC=/ansys_inc/v211/ansys/bin/mapdl</span>
+</pre></div>
+</div>
+</div>
+</dd>
+<dt>run_location<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>MAPDL 工作目录。默认为临时工作目录。如果目录不存在，则会创建一个。</p>
+</dd>
+<dt>jobname<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>MAPDL jobname. 默认为 <code class="docutils literal notranslate"><span class="pre">'file'</span></code> 。</p>
+</dd>
+<dt>nproc<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>处理器数量。默认为 2。</p>
+</dd>
+<dt>ram<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>为 MAPDL 申请的固定内存量。如果为 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，则 MAPDL 将使用主机上的可用内存。</p>
+</dd>
+<dt>mode<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>启动 MAPDL 的模式。必须是以下之一:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">'grpc'</span></code>: <code class="docutils literal notranslate"><span class="pre">'grpc'</span></code> 模式在 ANSYS 2021R1 或更新版本上可用，具有最佳性能和稳定性。</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">'console'</span></code>: <code class="docutils literal notranslate"><span class="pre">'console'</span></code> 模式仅用于 v17.0 之前的旧版 Linux。该控制台模式将会被启用。更多信息，请访问 <a class="reference internal" href="../../getting_started/versioning.html#versions-and-interfaces"><span class="std std-ref">Versions and interfaces</span></a> 。</p></li>
+</ul>
+</dd>
+<dt>override<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>尝试删除 <code class="docutils literal notranslate"><span class="pre">run_location</span></code> 处的锁定文件。若当之前的 MAPDL 会话过早退出，而锁定文件尚未删除时，此功能非常有用。</p>
+</dd>
+<dt>loglevel<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>设置打印到控制台的信息。 <code class="docutils literal notranslate"><span class="pre">'INFO'</span></code> 打印所有 ANSYS 信息， <code class="docutils literal notranslate"><span class="pre">'WARNING'</span></code> 只打印包含 ANSYS 警告的信息， <code class="docutils literal notranslate"><span class="pre">'ERROR'</span></code> 只记录错误信息。</p>
+</dd>
+<dt>additional_switches<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>MAPDL 其他开关，例如 <code class="docutils literal notranslate"><span class="pre">'aa_r'</span></code> ，学术研究许可证：</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">additional_switches=&quot;-aa_r&quot;</span></code></p></li>
+</ul>
+<p>避免添加 <code class="docutils literal notranslate"><span class="pre">-i</span></code> 、 <code class="docutils literal notranslate"><span class="pre">-o</span></code> 或 <code class="docutils literal notranslate"><span class="pre">-b</span></code> 等开关，因为启动 MAPDL 服务器时已包含这些开关。更多详情，请参阅注释部分。</p>
+</dd>
+<dt>start_timeout<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>连接 MAPDL 服务器的最长允许时间。</p>
+</dd>
+<dt>port<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></span></dt><dd><p>启动 MAPDL gRPC 的端口。最终端口将是该端口之后（或包括该端口）的第一个可用端口。默认为 50052。您也可以使用环境变量 <code class="docutils literal notranslate"><span class="pre">PYMAPDL_PORT=&lt;VALID</span> <span class="pre">PORT&gt;</span></code> 来覆盖默认端口，该参数的优先级高于环境变量。</p>
+</dd>
+<dt>cleanup_on_exit<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>当 python 退出或 mapdl Python 实例被垃圾回收时，退出 MAPDL。</p>
+</dd>
+<dt>start_instance<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>当为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 时，通过 <code class="docutils literal notranslate"><span class="pre">ip</span></code> 和 <code class="docutils literal notranslate"><span class="pre">port</span></code> 连接到现有的 MAPDL 实例，
+默认为 ip <code class="docutils literal notranslate"><span class="pre">'127.0.0.1'</span></code> 和端口 50052。否则，启动本地 MAPDL 实例。
+您也可以使用环境变量 <code class="docutils literal notranslate"><span class="pre">PYMAPDL_START_INSTANCE=FALSE</span></code> 来覆盖此关键字参数的默认行为。</p>
+</dd>
+<dt>ip<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>仅当 <code class="docutils literal notranslate"><span class="pre">start_instance</span></code> 为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 时使用。如果提供，它将强制 <code class="docutils literal notranslate"><span class="pre">start_instance</span></code> 为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。指定要连接的 MAPDL 实例的 IP 地址。
+您也可以提供主机名来替代 IP 地址。默认值为 <code class="docutils literal notranslate"><span class="pre">'127.0.0.1'</span></code> 。您也可以使用环境变量 <code class="docutils literal notranslate"><span class="pre">PYMAPDL_IP=&lt;IP&gt;</span></code> 来覆盖此关键字参数的默认行为。
+该参数的优先级高于环境变量。</p>
+</dd>
+<dt>clear_on_connect<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>默认为 <code class="docutils literal notranslate"><span class="pre">True</span></code> ，这样在连接到 MAPDL 时会有一个全新的环境。如果指定了 <code class="docutils literal notranslate"><span class="pre">start_instance</span></code> ，则默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。</p>
+</dd>
+<dt>log_apdl<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>若启用会将每一条 APDL 命令记录到本地磁盘。这可以用来 “record” 通过 PyMAPDL 发送到 MAPDL 的所有命令，这样就可以在 MAPDL 中运行脚本，而无需 PyMAPDL。
+该参数是输出文件的路径（例如 <code class="docutils literal notranslate"><span class="pre">log_apdl='pymapdl_log.txt'</span></code> ）。默认情况下禁用。</p>
+</dd>
+<dt>remove_temp_files<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>当 <code class="docutils literal notranslate"><span class="pre">run_location</span></code> 为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 时，启动器会在用户临时目录中创建一个新的 MAPDL 工作目录，该目录可通过 <code class="docutils literal notranslate"><span class="pre">tempfile.gettempdir()</span></code> 获取。
+当此参数为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 时，退出 MAPDL 时将删除此目录。默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version 0.64.0: </span>请改用参数 <code class="docutils literal notranslate"><span class="pre">remove_temp_dir_on_exit</span></code> 。</p>
+</div>
+</dd>
+<dt>remove_temp_dir_on_exit<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>当 <code class="docutils literal notranslate"><span class="pre">run_location</span></code> 为 None 时，启动器会在用户临时目录中创建一个新的 MAPDL 工作目录，该目录可通过 <code class="docutils literal notranslate"><span class="pre">tempfile.gettempdir()</span></code> 获取。
+当此参数为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 时，退出 MAPDL 时将删除此目录。默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。
+如果更改了工作目录，PyMAPDL 不会删除原来的工作目录，也不会删除新的工作目录。</p>
+</dd>
+<dt>verbose_mapdl<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>启动和运行 MAPDL 时，启用打印所有输出。这只能用于调试，因为输出可以在 pymapdl 中跟踪。默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。</p>
+<div class="deprecated">
+<p><span class="versionmodified deprecated">Deprecated since version v0.65.0: </span><code class="docutils literal notranslate"><span class="pre">verbose_mapdl</span></code> 参数已被弃用，将在今后的版本中删除。请使用日志记录器代替。详情参见 <a class="reference internal" href="../Logging/index.html#api-logging-ff"><span class="std std-ref">Logging</span></a> 。</p>
+</div>
+</dd>
+<dt>license_server_check<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>如果 MAPDL 启动失败，检查许可证服务器是否可用。仅适用于 <code class="docutils literal notranslate"><span class="pre">mode='grpc'</span></code> 。默认为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 。</p>
+</dd>
+<dt>license_type<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>启用许可证类型选择。可以输入一个字符串作为许可证名称（例如 <code class="docutils literal notranslate"><span class="pre">meba</span></code> 或 <code class="docutils literal notranslate"><span class="pre">ansys</span></code> ）或描述（分别为 “企业求解器” 或 “企业”）。
+您也可以使用旧版许可证（例如 <code class="docutils literal notranslate"><span class="pre">'aa_t_a'</span></code> ），但也会引发警告。
+如果未使用 (<code class="docutils literal notranslate"><span class="pre">None</span></code>)，则不会请求特定许可证，而是由许可证服务器提供特定许可证类型。默认为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 。</p>
+</dd>
+<dt>print_com<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>将命令 <code class="docutils literal notranslate"><span class="pre">/COM</span></code> 参数打印到标准输出。默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。（这个 <code class="docutils literal notranslate"><span class="pre">/COM</span></code> 命令是 APDL 里用来注释的。–ff）</p>
+</dd>
+<dt>add_env_vars<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>所提供的字典将用于扩展 MAPDL 进程环境变量。
+如果要控制所有环境变量，请使用参数 <code class="docutils literal notranslate"><span class="pre">replace_env_vars</span></code> 。默认为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 。</p>
+</dd>
+<dt>replace_env_vars<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>所提供的字典将用于替换所有 MAPDL 进程环境变量。
+它将替换系统环境变量，否则将在过程中使用这些变量。
+要在 MAPDL 进程中添加一些环境变量，请使用 <code class="docutils literal notranslate"><span class="pre">add_env_vars</span></code> 。默认为 <code class="docutils literal notranslate"><span class="pre">None</span></code> 。</p>
+</dd>
+<dt>version<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">float</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>要启动的 MAPDL 版本。如果 <code class="docutils literal notranslate"><span class="pre">None</span></code> ，则使用最新版本。版本可以是整数（如 <code class="docutils literal notranslate"><span class="pre">version=222</span></code> ）或浮点数（如 <code class="docutils literal notranslate"><span class="pre">version=22.2</span></code> ）。
+要检索可用的已安装版本，请使用函数 <code class="docutils literal notranslate"><span class="pre">ansys.tools.path.path.get_available_ansys_installations()</span></code> 。</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>默认版本也可通过环境变量 <code class="docutils literal notranslate"><span class="pre">PYMAPDL_MAPDL_VERSION</span></code> 设置。例如：</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">export PYMAPDL_MAPDL_VERSION=22.2</span>
+</pre></div>
+</div>
+</div>
+</dd>
+<dt>**kwargs<span class="classifier"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">dict</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">optional</span></code></span></dt><dd><p>这些关键字参数针对特定界面或用于开发目的。详情请参阅注释。</p>
+<p>set_no_abort : <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<p><em>(Development use only)</em>
+（仅限开发使用）设置 MAPDL 在 /BATCH 模式下第一次出错时不会终止。默认为 <code class="docutils literal notranslate"><span class="pre">True</span></code> 。</p>
+<p>force_intel : <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<p><em>(Development use only)</em>
+（仅限开发使用）在 Ansys 2021R0 和 2022R2 之间的版本中强制使用英特尔消息传递接口 (MPI)，由于 VPN 问题，默认情况下 MPI 已停用。
+更多信息，请参阅 <a class="reference internal" href="../../user_guide/troubleshoot.html#vpn-issues-troubleshooting"><span class="std std-ref">Virtual private network (VPN) issues</span></a> 。默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。</p>
+<p>log_broadcast : <a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+<p><em>(Only for CORBA mode)</em>
+启用 logger 记录广播命令。默认为 <code class="docutils literal notranslate"><span class="pre">False</span></code> 。</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">Union</span></code> [ <code class="docutils literal notranslate"><span class="pre">MapdlGrpc</span></code> , <code class="docutils literal notranslate"><span class="pre">MapdlConsole</span></code> , <code class="docutils literal notranslate"><span class="pre">MapdlCorba</span></code> ]</dt><dd><p>Mapdl 的一个实例。类型取决于所选的 <code class="docutils literal notranslate"><span class="pre">mode</span></code> 。</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-odd">Notes<span class="colon">:</span></dt>
+<dd class="field-odd"><dl>
+<dt><strong>Ansys Student Version</strong></dt><dd><p>如果检测到 Ansys Student 版本，除非指定其他选项，否则 PyMAPDL 将以共享内存并行（SMP）模式启动 MAPDL。</p>
+</dd>
+<dt><strong>Additional switches</strong></dt><dd><p>这些是 2020R2 中适用于通过 gRPC 将 MAPDL 作为服务运行的 MAPDL 开关选项。排除在外的开关，如 <code class="docutils literal notranslate"><span class="pre">&quot;-j&quot;</span></code>，要么不适用，要么通过关键字参数设置。</p>
+</dd>
+<dt>-acc &lt;device&gt;</dt><dd><p>启用 GPU 硬件。更多信息，请参阅《并行处理指南》中的 GPU 加速器功能。</p>
+</dd>
+<dt>-amfg</dt><dd><p>启用快速成型制造功能。需要获得快速成型制造许可证。有关此功能的一般信息，请参阅 ANSYS Workbench 中的增材制造过程仿真。</p>
+</dd>
+<dt>-ansexe &lt;executable&gt;</dt><dd><p>激活自定义 MAPDL 可执行文件。在 ANSYS 工作台环境中，激活自定义 MAPDL 可执行文件。</p>
+</dd>
+<dt>-custom &lt;executable&gt;</dt><dd><p>调用定制的 Mechanical APDL 可执行文件 更多信息，请参阅《程序员参考手册》中的 “运行您的定制可执行文件”。</p>
+</dd>
+<dt>-db value</dt><dd><p>初始内存分配</p>
+<p>定义用作数据库初始分配的工作区（内存）部分。默认值为 1024 MB。指定一个负数可在整个运行过程中强制使用固定大小；在小内存系统中非常有用。</p>
+</dd>
+<dt>-dis</dt><dd><p>启用分布式 ANSYS</p>
+<p>更多信息，请参阅《并行处理指南》。</p>
+</dd>
+<dt>-dvt</dt><dd><p>启用 ANSYS DesignXplorer 高级任务（附加组件）。
+需要 DesignXplorer。</p>
+</dd>
+<dt>-l &lt;language&gt;</dt><dd><p>指定使用英语以外的语言文件</p>
+<p>只有在 <code class="docutils literal notranslate"><span class="pre">/ansys_inc/v201/ansys/docu</span></code> 或 <code class="docutils literal notranslate"><span class="pre">Program</span> <span class="pre">Files\\ANSYS\Inc\V201\ANSYS\\docu</span></code> 中适当命名的子目录下有翻译的信息文件时，该选项才有效。</p>
+</dd>
+<dt>-m &lt;workspace&gt;</dt><dd><p>指定工作区的总大小</p>
+<p>用于初始分配的工作区（内存），单位为 MB。如果省略 <code class="docutils literal notranslate"><span class="pre">-m</span></code> 选项，默认值为 2 GB（2048 MB）。指定负数可强制在整个运行过程中使用固定大小。</p>
+</dd>
+<dt>-machines &lt;IP&gt;</dt><dd><p>指定分布式计算机</p>
+<p>运行分布式 ANSYS 分析的机器。有关详细信息，请参阅并行处理指南中的启动分布式 ANSYS。</p>
+</dd>
+<dt>-mpi &lt;value&gt;</dt><dd><p>指定要使用的 MPI 类型。</p>
+<p>更多信息，请参阅《并行处理指南》。</p>
+</dd>
+<dt>-mpifile &lt;appfile&gt;</dt><dd><p>指定现有的 MPI 文件</p>
+<p>指定要在分布式 ANSYS 运行中使用的现有 MPI 文件（appfile）。有关详细信息，请参阅并行处理指南中的使用 MPI 文件。</p>
+</dd>
+<dt>-na &lt;value&gt;</dt><dd><p>指定 GPU 加速设备的数量</p>
+<p>使用 GPU 加速器功能运行时，每台机器或计算节点的 GPU 设备数量。更多信息，请参阅《并行处理指南》中的 GPU 加速器功能。</p>
+</dd>
+<dt>-name &lt;value&gt;</dt><dd><p>定义 MAPDL 参数</p>
+<p>在程序启动时设置 MAPDL 参数。参数名称长度至少为两个字符。有关参数的详细信息，请参阅《ANSYS 参数化设计语言指南》。</p>
+</dd>
+<dt>-p &lt;productname&gt;</dt><dd><p>ANSYS 会话产品</p>
+<p>定义会话期间将运行的 ANSYS 会话产品。有关 <code class="docutils literal notranslate"><span class="pre">-p</span></code> 选项的详细信息，请参阅通过命令行选择 ANSYS 产品。</p>
+</dd>
+<dt>-ppf &lt;license feature name&gt;</dt><dd><p>HPC（高性能计算） 许可证</p>
+<p>指定并行处理运行时使用的 HPC 许可。有关详细信息，请参阅《并行处理指南》中的 HPC 许可。</p>
+</dd>
+<dt>-smp</dt><dd><p>启用共享内存并行。</p>
+<p>更多信息，请参阅《并行处理指南》。</p>
+</dd>
+</dl>
+<p>如果环境配置为使用 <a class="reference external" href="https://pypim.docs.pyansys.com">PyPIM</a> 且 <code class="docutils literal notranslate"><span class="pre">start_instance</span></code> 为 <code class="docutils literal notranslate"><span class="pre">True</span></code>，那么启动实例将委托给 PyPIM。在这种情况下，大部分选项将被忽略，服务器端配置将被使用。</p>
+</dd>
+<dt class="field-even">Examples<span class="colon">:</span></dt>
+<dd class="field-even"><p>使用最佳协议启动 MAPDL。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">ansys.mapdl.core</span> <span class="kn">import</span> <span class="n">launch_mapdl</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>使用共享内存并行运行 MAPDL，并指定 Ansys 二进制文件的位置。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">exec_file</span> <span class="o">=</span> <span class="s1">&#39;C:/Program Files/ANSYS Inc/v231/ansys/bin/winx64/ANSYS231.exe&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">exec_file</span><span class="p">,</span> <span class="n">additional_switches</span><span class="o">=</span><span class="s1">&#39;-smp&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>连接到 IP 地址为 192.168.1.30、端口为 50001 的现有 MAPDL 实例。这只能使用最新的 <code class="docutils literal notranslate"><span class="pre">'grpc'</span></code> 模式。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">start_instance</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ip</span><span class="o">=</span><span class="s1">&#39;192.168.1.30&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">port</span><span class="o">=</span><span class="mi">50001</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用控制台模式运行 MAPDL（不建议使用，仅适用于 Linux）。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="s1">&#39;/ansys_inc/v194/ansys/bin/ansys194&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                      <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;console&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用附加环境变量运行 MAPDL。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_env_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;my_var&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span> <span class="s2">&quot;ANSYS_LOCK&quot;</span><span class="p">:</span><span class="s2">&quot;FALSE&quot;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">add_env_vars</span><span class="o">=</span><span class="n">my_env_vars</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>使用我们自己的环境变量集运行 MAPDL。它取代了系统环境变量，否则系统环境变量会在运行过程中使用。</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">my_env_vars</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;my_var&quot;</span><span class="p">:</span><span class="s2">&quot;true&quot;</span><span class="p">,</span>
+<span class="go">    &quot;ANSYS_LOCK&quot;:&quot;FALSE&quot;,</span>
+<span class="go">    &quot;ANSYSLMD_LICENSE_FILE&quot;:&quot;1055@MYSERVER&quot;}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mapdl</span> <span class="o">=</span> <span class="n">launch_mapdl</span><span class="p">(</span><span class="n">replace_env_vars</span><span class="o">=</span><span class="n">my_env_vars</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ff_ansys.mapdl.core.launcher.launch_mapdl"><code class="docutils literal notranslate"><span class="pre">ff_ansys.mapdl.core.launcher.launch_mapdl()</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item"> 
+<div class="tocsection editthispage">
+  <a href="https://github.com/ansys/pymapdl/edit/main/doc/source/api_ff/Launcher/launch_mapdl.rst">
+    <i class="fa-solid fa-pencil"></i>
+       Edit
+    on GitHub  
+  </a>
+</div>
+
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/bootstrap.js?digest=5b4479735964841361fd"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=5b4479735964841361fd"></script>
+
+<footer class="bd-footer" font-size="4px">
+  <div class="bd-footer__inner bd-page-width">
+    <div class="footer-items__start">
+      <div class="footer-item">
+        <p class="copyright">
+          PyMAPDL 0.68.1 © Copyright (c) 2024 ANSYS, Inc. All rights reserved.
+          <br>
+        </p>
+      </div>
+    </div>
+    <div class="footer-items__end">
+      <div class="footer-item">
+        <p class="theme-version">
+          Built with the
+          <a href="https://sphinxdocs.ansys.com/version/stable/index.html">Ansys Sphinx Theme</a>
+          0.15.2. and
+           <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
+          on <span id="date"></span>
+        </p>
+        <script>
+          var options = { day: "numeric", month: "long", year: "numeric" };
+          var lastModifiedDate = new Date(document.lastModified);
+          var date = lastModifiedDate.toLocaleDateString("en-US", options);
+          document.getElementById("date").innerHTML = date;
+        </script>
+      </div>
+    </div>
+  </div>
+</footer>
+
+  </body>
+</html>
